@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by  Mobile Dev Team  on 1/11/20 9:35 AM
+  ~ Copyright (c) Resala Charity Organization. All rights reserved.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/language"
+            android:icon="@drawable/ic_language"
+            app:showAsAction="always"
+            android:title="language"/>
+</menu>

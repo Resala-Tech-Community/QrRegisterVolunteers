@@ -1,0 +1,40 @@
+<!--
+  ~ Created by  Mobile Dev Team  on 1/11/20 9:35 AM
+  ~ Copyright (c) Resala Charity Organization. All rights reserved.
+  -->
+
+<resources>
+    <string name="app_name">Resala</string>
+
+
+    <!--view flipper-->
+    <string name="internet_connection_has_been_lost">internet connection has been lost</string>
+    <string name="retry">retry</string>
+
+
+    <string name="no_data_found">No data found</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="edited_post_str">post has been edited</string>
+    <string name="deleted_post_str">post has been deleted</string>
+    <string name="post_added_str">new post added</string>
+    <string name="cannotpost_while_offline">can\'t post while offline</string>
+    <string name="cannotdelete_while_offline">can\'t delete while offline</string>
+    <string name="cannotedit_while_offline">can\'t edit while offline</string>
+    <string name="loading">loading</string>
+    <string name="id">Employee ID</string>
+    <string name="password">Password</string>
+    <string name="forgot">forgot password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="please_grant_camera_permission">Please grant camera Permession</string>
+    <string name="vid">Volunteer ID</string>
+    <string name="register_volunteer_by_scanning_qr_code_or_by_id">Register Volunteer by scanning QR code or by ID</string>
+    <string name="register">register</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address_line">Address Line</string>
+    <string name="please_fill_in_the_following_fields">Please Fill in the following fields</string>
+    <string name="drag_to_register_new_volunteer">Drag to register new Volunteer</string>
+
+</resources>

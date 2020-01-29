@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Created by  Mobile Dev Team  on 1/11/20 9:35 AM
+  ~ Copyright (c) Resala Charity Organization. All rights reserved.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
