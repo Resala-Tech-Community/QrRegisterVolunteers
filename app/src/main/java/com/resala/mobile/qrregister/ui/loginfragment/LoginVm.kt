@@ -50,8 +50,6 @@ class LoginVm(dataManager: DataManager) : BaseViewModel(dataManager) {
             //call api for checking credentials
             _checkValidations.value = Result(isSuccess = true)
         }
-
-
     }
     data class Result(val isSuccess: Boolean = false, val error: Throwable? = null)
 }
