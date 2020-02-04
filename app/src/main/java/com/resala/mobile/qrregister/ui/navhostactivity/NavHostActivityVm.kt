@@ -18,4 +18,5 @@ val navHostActivityModule = module {
 class NavHostActivityVm(dataManager: DataManager) : BaseViewModel(dataManager) {
 
 
+
 }

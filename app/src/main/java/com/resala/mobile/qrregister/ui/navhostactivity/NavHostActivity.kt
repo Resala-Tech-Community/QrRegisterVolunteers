@@ -17,6 +17,7 @@ class NavHostActivity : BaseActivity<NavHostActivityVm>() {
 
     override fun doOnCreate() {
         super.doOnCreate()
+        //hi from there
 
     }
 
