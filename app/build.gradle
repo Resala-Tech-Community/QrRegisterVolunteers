@@ -12,7 +12,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'androidx.navigation.safeargs'
-apply plugin: 'com.google.gms.google-services'
 
 android {
 
@@ -94,8 +93,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation "androidx.core:core-ktx:1.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-
-    implementation 'com.google.firebase:firebase-ml-vision-object-detection-model:19.0.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'com.google.firebase:firebase-ml-vision-barcode-model:16.0.2'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.21.0'
@@ -163,7 +161,6 @@ dependencies {
     implementation deps.arch.fragmentKtx
     implementation deps.arch.uiKtx
     implementation deps.google.androidXLegacySupport
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
 
 
 }
@@ -171,3 +168,4 @@ dependencies {
 repositories {
     mavenCentral()
 }
+apply plugin: 'com.google.gms.google-services'

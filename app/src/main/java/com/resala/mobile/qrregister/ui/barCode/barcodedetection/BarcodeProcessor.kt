@@ -6,13 +6,17 @@
 package com.resala.mobile.qrregister.ui.barCode.barcodedetection
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.util.Log
 import androidx.annotation.MainThread
 import com.google.android.gms.tasks.Task
+import com.google.firebase.FirebaseApp
 import com.resala.mobile.qrregister.ui.barCode.camera.CameraReticleAnimator
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.resala.mobile.qrregister.shared.util.io.app.MyApp
 import com.resala.mobile.qrregister.ui.barCode.camera.GraphicOverlay
 import com.resala.mobile.qrregister.ui.barCode.barViewModel.WorkflowModel
 import com.resala.mobile.qrregister.ui.barCode.barViewModel.WorkflowModel.WorkflowState
@@ -23,12 +27,15 @@ import java.io.IOException
 /** A processor to run the barcode detector.  */
 class BarcodeProcessor(graphicOverlay: GraphicOverlay, private val workflowModel: WorkflowModel) :
     FrameProcessorBase<List<FirebaseVisionBarcode>>() {
-
-    private val detector = FirebaseVision.getInstance().visionBarcodeDetector
+    private  var detector: FirebaseVisionBarcodeDetector
     private val cameraReticleAnimator: CameraReticleAnimator = CameraReticleAnimator(graphicOverlay)
+    init {
+        FirebaseApp.initializeApp(MyApp.context)
+        detector=FirebaseVision.getInstance().visionBarcodeDetector
 
-    override fun detectInImage(image: FirebaseVisionImage): Task<List<FirebaseVisionBarcode>> =
-        detector.detectInImage(image)
+
+    }
+    override fun detectInImage(image: FirebaseVisionImage): Task<List<FirebaseVisionBarcode>> = detector.detectInImage(image)
 
     @MainThread
     override fun onSuccess(

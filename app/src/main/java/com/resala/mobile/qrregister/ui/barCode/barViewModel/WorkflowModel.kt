@@ -10,7 +10,6 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
-import com.resala.mobile.qrregister.ui.barCode.barcodedetection.DetectedObject
 import java.util.HashSet
 
 /** View model for handling application workflow based on camera preview.  */
@@ -24,7 +23,6 @@ class WorkflowModel(application: Application) : AndroidViewModel(application) {
     var isCameraLive = false
         private set
 
-    private var confirmedObject: DetectedObject? = null
 
 
     /**
@@ -35,19 +33,12 @@ class WorkflowModel(application: Application) : AndroidViewModel(application) {
         DETECTING,
         DETECTED,
         CONFIRMING,
-        CONFIRMED,
         SEARCHING,
         SEARCHED
     }
 
     @MainThread
     fun setWorkflowState(workflowState: WorkflowState) {
-        if (workflowState != WorkflowState.CONFIRMED &&
-                workflowState != WorkflowState.SEARCHING &&
-                workflowState != WorkflowState.SEARCHED
-        ) {
-            confirmedObject = null
-        }
         this.workflowState.value = workflowState
     }
 

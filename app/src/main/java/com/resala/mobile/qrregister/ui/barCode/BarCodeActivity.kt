@@ -19,6 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.common.internal.Objects
 import com.google.android.material.chip.Chip
+import com.google.firebase.FirebaseApp
 import com.resala.mobile.qrregister.ui.barCode.camera.GraphicOverlay
 import com.resala.mobile.qrregister.ui.barCode.barViewModel.WorkflowModel
 import com.resala.mobile.qrregister.ui.barCode.barViewModel.WorkflowModel.WorkflowState
@@ -27,6 +28,7 @@ import com.resala.mobile.qrregister.ui.barCode.barcodedetection.BarcodeProcessor
 import com.resala.mobile.qrregister.ui.barCode.barcodedetection.BarcodeResultFragment
 import com.resala.mobile.qrregister.ui.barCode.camera.CameraSourcePreview
 import com.resala.mobile.qrregister.R
+import com.resala.mobile.qrregister.shared.util.io.app.MyApp.Companion.context
 import com.resala.mobile.qrregister.ui.barCode.camera.CameraSource
 import com.resala.mobile.qrregister.ui.barCode.settings.SettingsActivity
 import java.io.IOException
@@ -47,8 +49,8 @@ class BarCodeActivity : AppCompatActivity(), OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_barcode)
+        FirebaseApp.initializeApp(context)
         preview = findViewById(R.id.camera_preview)
         graphicOverlay = findViewById<GraphicOverlay>(R.id.camera_preview_graphic_overlay).apply {
             setOnClickListener(this@BarCodeActivity)
@@ -74,7 +76,6 @@ class BarCodeActivity : AppCompatActivity(), OnClickListener {
 
     override fun onResume() {
         super.onResume()
-
         workflowModel?.markCameraFrozen()
         settingsButton?.isEnabled = true
         currentWorkflowState = WorkflowState.NOT_STARTED

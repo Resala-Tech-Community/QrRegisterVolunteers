@@ -10,6 +10,7 @@ import android.app.Application
 import android.content.Context
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.firebase.FirebaseApp
 import com.resala.mobile.qrregister.shared.koin.KoinHelper
 
 
