@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "308746440888",
+    "firebase_url": "https://qrregistervolunteers.firebaseio.com",
+    "project_id": "qrregistervolunteers",
+    "storage_bucket": "qrregistervolunteers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308746440888:android:f44b9753862a1ab3e9644d",
+        "android_client_info": {
+          "package_name": "com.resala.mobile.qrregister"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308746440888-8uc0nlmok1c2ide49g8o7ekjggs2u2k1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.resala.mobile.qrregister",
+            "certificate_hash": "098b91718cc3229c03367353497de9bb184334a3"
+          }
+        },
+        {
+          "client_id": "308746440888-e0v5dnfq80loem58kss9c6pm74fvpeis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSTUIHGhAXXb1Gzbx8AHsXgD64GCX1xbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308746440888-e0v5dnfq80loem58kss9c6pm74fvpeis.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

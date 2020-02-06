@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by  Mobile Dev Team  on 2/5/20 10:38 PM
+  ~ Copyright (c) Resala Charity Organization. All rights reserved.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
+
+  <com.resala.mobile.qrregister.ui.barCode.camera.CameraSourcePreview
+      android:id="@+id/camera_preview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <include layout="@layout/camera_preview_overlay"/>
+
+  </com.resala.mobile.qrregister.ui.barCode.camera.CameraSourcePreview>
+
+  <include
+      layout="@layout/top_action_bar_camera"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="top"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

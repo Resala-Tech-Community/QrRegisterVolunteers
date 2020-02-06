@@ -36,5 +36,37 @@
     <string name="address_line">Address Line</string>
     <string name="please_fill_in_the_following_fields">Please Fill in the following fields</string>
     <string name="drag_to_register_new_volunteer">Drag to register new Volunteer</string>
+    <string name="cd_settings_button" translatable="false">Settings</string>
+    <string name="cd_close_button" translatable="false">Back</string>
+    <string name="cd_flash_button" translatable="false">Toggle camera flash</string>
+    <string name="prompt_move_camera_closer" translatable="false">Move closer to search</string>
+    <string name="prompt_searching" translatable="false">Searching&#8230;</string>
+    <string name="prompt_point_at_a_barcode" translatable="false">Point your camera at a barcode</string>
+    <string name="settings_title" translatable="false">Settings</string>
+
+    <!-- Strings for barcode detection settings. -->
+    <string name="pref_category_barcode_detection" translatable="false">Barcode detection</string>
+    <string name="pref_key_barcode_reticle_width" translatable="false">barcode_brw</string>
+    <string name="pref_title_barcode_reticle_width" translatable="false">Barcode reticle width</string>
+    <string name="pref_summary_barcode_reticle_width" formatted="false" translatable="false">Relative to the camera view width, ranges from 50% to 95%</string>
+    <string name="pref_key_barcode_reticle_height" translatable="false">barcode_brh</string>
+    <string name="pref_title_barcode_reticle_height" translatable="false">Barcode reticle height</string>
+    <string name="pref_summary_barcode_reticle_height" formatted="false" translatable="false">Relative to the camera view height, ranges from 20% to 80%</string>
+    <string name="pref_key_enable_barcode_size_check" translatable="false">barcode_ebsc</string>
+    <string name="pref_title_enable_barcode_size_check" translatable="false">Enable barcode size check</string>
+    <string name="pref_summary_enable_barcode_size_check" translatable="false">Will prompt user to move camera closer if the detected barcode is too small</string>
+    <string name="pref_key_minimum_barcode_width" translatable="false">barcode_mbw</string>
+    <string name="pref_title_minimum_barcode_width" translatable="false">Minimum barcode width</string>
+    <string name="pref_summary_minimum_barcode_width" formatted="false" translatable="false">Relative to the reticle width, ranges from 20% to 80% (only applicable when barcode size check enabled)</string>
+    <string name="pref_key_delay_loading_barcode_result" translatable="false">barcode_dlbr</string>
+    <string name="pref_title_delay_loading_barcode_result" translatable="false">Delay loading barcode result</string>
+    <string name="pref_summary_delay_loading_barcode_result" translatable="false">Will show the loading spinner for 2s</string>
+    <!-- Strings for camera settings. -->
+    <string name="pref_category_camera" translatable="false">Camera</string>
+    <string name="pref_key_rear_camera_preview_size" translatable="false">rcpvs</string>
+    <string name="pref_key_rear_camera_picture_size" translatable="false">rcpts</string>
+    <string name="pref_title_rear_camera_preview_size" translatable="false">Rear camera preview size</string>
+
+
 
 </resources>
