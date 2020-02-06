@@ -7,6 +7,7 @@ package com.resala.mobile.qrregister.ui.eventsFragment
 
 import android.renderscript.ScriptGroup
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +18,8 @@ import com.resala.mobile.qrregister.shared.interfaces.SimpleItemClickListener
 import kotlinx.android.synthetic.main.dialog_scan_success.view.*
 import java.text.FieldPosition
 
-class EventsAdapter<T>(private val eventList: ArrayList<T>) : RecyclerView.Adapter<EventsAdapter.EventListViewHolder>() {
+class EventsAdapter<T>(private val eventList: ArrayList<T>,private val mClickListener :(View)->Unit) : RecyclerView.Adapter<EventsAdapter.EventListViewHolder>() {
 
-    private lateinit var mClickListener:SimpleItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventListViewHolder {
         val layoutInflater=LayoutInflater.from(parent.context)
@@ -30,19 +30,20 @@ class EventsAdapter<T>(private val eventList: ArrayList<T>) : RecyclerView.Adapt
     override fun getItemCount()=eventList.size
 
     override fun onBindViewHolder(holder: EventListViewHolder, position: Int) {
-        holder.bind(eventList[position])
+        holder.bind(eventList[position], mClickListener)
     }
 
-    public fun setOnClickListener(clickListener: SimpleItemClickListener){
-        mClickListener=clickListener
-    }
 
     class EventListViewHolder(var view:ViewEventListItemBinding):RecyclerView.ViewHolder(view.root){
 
-        fun <T>bind(bindObj:T){
+        fun <T>bind(bindObj:T,clickListener:(View)->Unit){
             if(bindObj is EventPOJO){
 
                 view.event=bindObj
+
+                view.root.setOnClickListener {
+                    clickListener(it)
+                }
             }
         }
     }
