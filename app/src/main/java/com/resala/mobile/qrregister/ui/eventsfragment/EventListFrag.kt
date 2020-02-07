@@ -20,37 +20,21 @@ class EventListFrag : BaseFrag<EventListVm>() {
     override fun doOnViewCreated() {
         super.doOnViewCreated()
 
-        loading()
-        showError()
         getEventList()
-
-        vm.getEvent()
-
-    }
-
-    private fun loading() {
-        vm.load
-            .observe(this, Observer {
-                //Hide Loading View
-            })
 
     }
 
     private fun getEventList() {
-        vm.eventListMutableLiveData
-            .observe(this
-                , Observer {
-                    //Populate RV List
-                })
+        vm.responseBody.observe(
+            this,
+            Observer {
+                //Here Travers Through Model Values
+            }
+        )
 
-    }
 
-    private fun showError() {
-        vm.errorMessage
-            .observe(this,
-                Observer {
-                    //Show Error Message
-                })
+        vm.getEvents()
+
     }
 
 

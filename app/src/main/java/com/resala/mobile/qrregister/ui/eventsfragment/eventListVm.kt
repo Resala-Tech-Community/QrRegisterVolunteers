@@ -19,25 +19,28 @@ val eventModule = module {
 }
 
 class EventListVm(dataManager: DataManager) : BaseViewModel(dataManager) {
-    lateinit var eventListMutableLiveData: MutableLiveData<List<EventPOJO>>
-    lateinit var load: MutableLiveData<Boolean>
-    lateinit var errorMessage: MutableLiveData<Throwable>
+    lateinit var responseBody: MutableLiveData<ResponseBody>
 
     @SuppressLint("CheckResult")
-    fun getEvent() {
-        load.value = true
+    fun getEvents() {
+        responseBody.value = ResponseBody(isLoading = true)
 
         api.getEvents()
             .subscribeOn(scheduler.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
-                eventListMutableLiveData.value = result
+                responseBody.value = ResponseBody(eventList = result)
             }, { throwable ->
-                errorMessage.value = throwable
+                responseBody.value = ResponseBody(errorMessage = throwable)
             }, {
-                load.value = false
+                responseBody.value = ResponseBody(isLoading = false)
             })
     }
 
+    data class ResponseBody(
+        val eventList: List<EventPOJO> = emptyList(),
+        val isLoading: Boolean = false,
+        val errorMessage: Throwable? = null
+    )
 
 }
