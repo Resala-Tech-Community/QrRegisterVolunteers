@@ -5,8 +5,6 @@
 
 package com.resala.mobile.qrregister.ui.navhostactivity
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.shared.ui.activity.BaseActivity
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -15,15 +13,14 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class NavHostActivity : BaseActivity<NavHostActivityVm>() {
 
     override val vm: NavHostActivityVm by viewModel()
-    override var layoutId: Int = R.layout.login_frag
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(layoutId)
-    }
+    override var layoutId: Int = R.layout.activity_nav_host
 
-    fun loadFragment(fragment: Fragment) {
+    override fun doOnCreate() {
+        super.doOnCreate()
 
     }
 
 
 }
+
+

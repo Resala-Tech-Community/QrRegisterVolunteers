@@ -157,9 +157,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="767a85" />
-                            <entry key="outputName" value="ic_lock_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Ahmed Elmasry\Desktop\ic_login.svg" />
+                            <entry key="outputName" value="ic_lock" />
+                            <entry key="sourceFile" value="C:\Users\Ahmed Elmasry\Desktop\lock.svg" />
                           </map>
                         </option>
                       </PersistentState>

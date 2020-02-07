@@ -22,5 +22,4 @@ class LoginFrag : BaseFrag<LoginVm>() {
 
     }
 
-
 }
