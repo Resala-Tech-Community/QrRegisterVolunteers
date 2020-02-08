@@ -5,14 +5,15 @@
 
 package com.resala.mobile.qrregister.ui.loginfragment
 
+import android.view.View
+import android.widget.EditText
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
+import com.resala.mobile.qrregister.shared.util.isNullOrEmpty
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class LoginFrag : BaseFrag<LoginVm>() {
-
-
     override val vm: LoginVm by viewModel()
     override var layoutId: Int = R.layout.login_frag
 
@@ -22,5 +23,24 @@ class LoginFrag : BaseFrag<LoginVm>() {
 
     }
 
+
+    fun checkValidations(idEdt: EditText, passwordEdt: EditText) {
+        var focusView: View? = null
+
+        if (!isNullOrEmpty(idEdt.text.toString())) {
+            //Take Action
+            idEdt.error = "Required"
+            focusView = idEdt
+        } else if (!isNullOrEmpty(passwordEdt.text.toString())) {
+            //Take Action
+            passwordEdt.error = "Required"
+            focusView = passwordEdt
+        } else {
+            //request Login API
+            focusView?.requestFocus()
+
+        }
+
+    }
 
 }
