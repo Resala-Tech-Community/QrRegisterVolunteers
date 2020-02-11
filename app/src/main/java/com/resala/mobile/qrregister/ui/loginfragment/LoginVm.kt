@@ -5,7 +5,9 @@
 
 package com.resala.mobile.qrregister.ui.loginfragment
 
+ 
 import android.annotation.SuppressLint
+ 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.resala.mobile.qrregister.shared.data.DataManager
@@ -22,6 +24,7 @@ val loginModule = module {
 
 class LoginVm(dataManager: DataManager) : BaseViewModel(dataManager) {
 
+ 
     private val _login = MutableLiveData<Unit>()
     val login: LiveData<Unit> = _login
 
@@ -52,4 +55,5 @@ class LoginVm(dataManager: DataManager) : BaseViewModel(dataManager) {
         val error: Throwable? = null
     )
 
+ 
 }

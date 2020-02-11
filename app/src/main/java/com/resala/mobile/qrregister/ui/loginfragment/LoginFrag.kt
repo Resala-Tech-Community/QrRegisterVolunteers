@@ -5,6 +5,7 @@
 
 package com.resala.mobile.qrregister.ui.loginfragment
 
+ 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +13,21 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+ 
+ 
+ 
+ 
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragLoginBinding
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
+ 
 import com.resala.mobile.qrregister.shared.util.BuildUtil
 import com.resala.mobile.qrregister.shared.util.ext.showError
 
 import com.resala.mobile.qrregister.shared.util.isNullOrEmpty
 import kotlinx.android.synthetic.main.frag_login.*
+ 
+ 
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -123,6 +131,25 @@ class LoginFrag : BaseFrag<LoginVm>() {
             val action = LoginFragDirections
                 .actionLoginFragToEventsFrag()
             findNavController().navigate(action)
+        }
+
+    }
+
+    fun checkValidations(idEdt: EditText, passwordEdt: EditText) {
+        var focusView: View? = null
+
+        if (!isNullOrEmpty(idEdt.text.toString())) {
+            //Take Action
+            idEdt.error = "Required"
+            focusView = idEdt
+        } else if (!isNullOrEmpty(passwordEdt.text.toString())) {
+            //Take Action
+            passwordEdt.error = "Required"
+            focusView = passwordEdt
+        } else {
+            //request Login API
+            focusView?.requestFocus()
+
         }
 
     }
