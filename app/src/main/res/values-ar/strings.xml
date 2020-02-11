@@ -21,10 +21,10 @@
     <string name="cannotdelete_while_offline">لا يمكن المسح بدون انترنت</string>
     <string name="cannotedit_while_offline">لا يمكن التعديل بدون انترنت</string>
     <string name="loading">loading</string>
-    <string name="id">Empolyee ID</string>
-    <string name="password">Password</string>
-    <string name="forgot">forgot passeord?</string>
-    <string name="sign_in">Sign In</string>
+    <string name="id">الرقم التعريفي</string>
+    <string name="password">كلمة المرور</string>
+    <string name="forgot">نسيت كلمة المرور؟</string>
+    <string name="sign_in">تسجيل الدخول</string>
     <string name="please_grant_camera_permission">Please grant camera Permession</string>
     <string name="vid">Volunteer ID</string>
     <string name="register_volunteer_by_scanning_qr_code_or_by_id">Register Volunteer by scanning QR code or by ID</string>

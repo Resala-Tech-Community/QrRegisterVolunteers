@@ -15,7 +15,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFrag : BaseFrag<LoginVm>() {
     override val vm: LoginVm by viewModel()
-    override var layoutId: Int = R.layout.login_frag
+    override var layoutId: Int = R.layout.frag_login
 
 
     override fun doOnViewCreated() {

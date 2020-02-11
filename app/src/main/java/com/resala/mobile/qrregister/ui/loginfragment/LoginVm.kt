@@ -18,9 +18,6 @@ val loginModule = module {
 }
 
 class LoginVm(dataManager: DataManager) : BaseViewModel(dataManager) {
-    private var _checkValidations = MutableLiveData<Result>()
-    val checkValidations: LiveData<Result> = _checkValidations
 
-
-    data class Result(val isSuccess: Boolean = false, val error: Throwable? = null)
+ 
 }
