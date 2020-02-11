@@ -36,5 +36,7 @@
     <string name="address_line">Address Line</string>
     <string name="please_fill_in_the_following_fields">Please Fill in the following fields</string>
     <string name="drag_to_register_new_volunteer">Drag to register new Volunteer</string>
+    <string name="timeout">Connection timeout</string>
+    <string name="device_is_offline">Device is offline!</string>
 
 </resources>

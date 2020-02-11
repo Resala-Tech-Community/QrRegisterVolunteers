@@ -33,6 +33,12 @@ data class EventPOJO constructor(
     val dateForList: String
         get() = if (date.isNotEmpty()) date else branch
 
+    val time: String
+        get() = if (date.isNotEmpty()) "11:30" else branch
+
+    val meridian: String
+        get() = if (date.isNotEmpty()) "AM" else branch
+
 }
 
 

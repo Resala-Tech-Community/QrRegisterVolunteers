@@ -148,12 +148,12 @@ abstract class BaseActivity<VM : BaseViewModel>
         MultiDex.install(this)
     }
 
-    protected fun showProgressBar() {
+    open fun showProgressBar() {
         mProgressBar!!.visibility = View.VISIBLE
         mFrameLayout!!.isClickable = false
     }
 
-    protected fun hideProgressBar() {
+    open fun hideProgressBar() {
         mProgressBar!!.visibility = View.GONE
         mFrameLayout!!.isClickable = true
     }
