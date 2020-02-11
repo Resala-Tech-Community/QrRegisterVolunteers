@@ -5,9 +5,6 @@
 
 package com.resala.mobile.qrregister.ui.loginfragment
 
-import android.text.TextUtils
-import android.view.View
-import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.resala.mobile.qrregister.shared.data.DataManager
@@ -22,4 +19,5 @@ val loginModule = module {
 
 class LoginVm(dataManager: DataManager) : BaseViewModel(dataManager) {
 
+ 
 }
