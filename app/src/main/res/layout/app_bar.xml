@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -18,12 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center"
+            android:visibility="gone"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true">
+
 
             <ImageView
                     android:id="@+id/back_arrow"

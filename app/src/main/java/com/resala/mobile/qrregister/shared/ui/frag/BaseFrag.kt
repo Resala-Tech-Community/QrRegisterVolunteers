@@ -10,10 +10,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.shared.ui.activity.BaseActivity
 import com.resala.mobile.qrregister.shared.ui.view.BaseView
 import com.resala.mobile.qrregister.shared.vm.BaseViewModel
+import kotlinx.android.synthetic.main.app_loading_screen.*
+import kotlinx.android.synthetic.main.app_no_data_found.*
+import kotlinx.android.synthetic.main.app_no_internet_connection.*
+import kotlinx.android.synthetic.main.app_no_result_found.*
+import kotlinx.android.synthetic.main.frag_events.*
 
 import java.util.*
 
@@ -29,6 +36,7 @@ abstract class BaseFrag<VM : BaseViewModel> : Fragment(), BaseView {
 
     open var hasBackNavigation = false
     open var hasSwipeRefresh = false
+    open var hasToolBar = false
 
     /*Recycler View Data*/
 
@@ -65,6 +73,7 @@ abstract class BaseFrag<VM : BaseViewModel> : Fragment(), BaseView {
             setupUi()
             setupFont()
             doOnViewCreated()
+            showToolBar()
 
         } catch (e: Exception) {
 
@@ -79,6 +88,12 @@ abstract class BaseFrag<VM : BaseViewModel> : Fragment(), BaseView {
 
     protected open fun onRetryClicked() {}
 
+    private fun showToolBar() {
+        if (!hasToolBar) return
+        val toolbar: Toolbar = activity()!!.findViewById(R.id.toolbar)
+            ?: throw IllegalStateException("toolbar not found!")
+        toolbar.visibility = View.VISIBLE
+    }
 
     override fun onResume() {
         super.onResume()
@@ -100,6 +115,31 @@ abstract class BaseFrag<VM : BaseViewModel> : Fragment(), BaseView {
     override fun baseViewModel(): BaseViewModel? {
         return vm
     }
+
+
+    fun showLoader() {
+        mViewFlipper?.displayedChild = mViewFlipper!!.indexOfChild(relLoadingScreen)
+
+    }
+
+    fun showMainLayout() {
+        mViewFlipper?.displayedChild = mViewFlipper!!.indexOfChild(main_layout_display)
+    }
+
+    fun showErrorData() {
+        mViewFlipper?.displayedChild = mViewFlipper!!.indexOfChild(linNoResult)
+    }
+
+    fun showOfflineMode() {
+        mViewFlipper?.displayedChild = mViewFlipper!!.indexOfChild(linOfflineScreen)
+        btnRetry.setOnClickListener { this.onRetryClicked() }
+    }
+
+    fun showEmptyData() {
+        mViewFlipper?.displayedChild = mViewFlipper!!.indexOfChild(linEmptyData)
+    }
+
+
 
 
 }
