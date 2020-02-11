@@ -21,35 +21,5 @@ val loginModule = module {
 }
 
 class LoginVm(dataManager: DataManager) : BaseViewModel(dataManager) {
-    private var _checkValidations = MutableLiveData<Result>()
-    val checkValidations: LiveData<Result> = _checkValidations
 
-    fun checkValidations(idEdt: EditText, passwordEdt: EditText) {
-
-        var cancel = false
-        var focusView: View? = null
-
-        if (TextUtils.isEmpty(idEdt.text.toString())) {
-            idEdt.error = "Required"
-            focusView = idEdt
-            cancel = true
-        } else {
-            idEdt.error = null
-        }
-
-        if (TextUtils.isEmpty(passwordEdt.text.toString())) {
-            passwordEdt.error = "Required"
-            focusView = passwordEdt
-            cancel = true
-        } else {
-            passwordEdt.error = null
-        }
-        if (cancel) {
-            focusView?.requestFocus()
-        } else {
-            //call api for checking credentials
-            _checkValidations.value = Result(isSuccess = true)
-        }
-    }
-    data class Result(val isSuccess: Boolean = false, val error: Throwable? = null)
 }

@@ -23,7 +23,7 @@
     <string name="loading">loading</string>
     <string name="id">Employee ID</string>
     <string name="password">Password</string>
-    <string name="forgot">forgot password?</string>
+    <string name="forgot">Forgot password?</string>
     <string name="sign_in">Sign In</string>
     <string name="please_grant_camera_permission">Please grant camera Permession</string>
     <string name="vid">Volunteer ID</string>
