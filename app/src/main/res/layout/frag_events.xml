@@ -14,7 +14,7 @@
 
         <variable
                 name="viewmodel"
-                type="com.resala.mobile.qrregister.ui.eventsFragment.EventListVm" />
+                type="com.resala.mobile.qrregister.ui.eventsfragment.EventListVm" />
 
     </data>
 

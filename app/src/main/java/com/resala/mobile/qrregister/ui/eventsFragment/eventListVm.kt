@@ -3,7 +3,7 @@
  * Copyright (c) Resala Charity Organization. All rights reserved.
  */
 
-package com.resala.mobile.qrregister.ui.eventsFragment
+package com.resala.mobile.qrregister.ui.eventsfragment
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData

@@ -3,7 +3,7 @@
  * Copyright (c) Resala Charity Organization. All rights reserved.
  */
 
-package com.resala.mobile.qrregister.ui.eventsFragment
+package com.resala.mobile.qrregister.ui.eventsfragment
 
 
 import Utils
@@ -17,7 +17,6 @@ import com.resala.mobile.qrregister.databinding.FragEventsBinding
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
 import com.resala.mobile.qrregister.shared.util.ext.showError
-import com.resala.mobile.qrregister.ui.eventsfragment.EventsAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 open class EventListFrag : BaseFrag<EventListVm>() {
