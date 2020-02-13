@@ -135,23 +135,5 @@ class LoginFrag : BaseFrag<LoginVm>() {
 
     }
 
-    fun checkValidations(idEdt: EditText, passwordEdt: EditText) {
-        var focusView: View? = null
-
-        if (!isNullOrEmpty(idEdt.text.toString())) {
-            //Take Action
-            idEdt.error = "Required"
-            focusView = idEdt
-        } else if (!isNullOrEmpty(passwordEdt.text.toString())) {
-            //Take Action
-            passwordEdt.error = "Required"
-            focusView = passwordEdt
-        } else {
-            //request Login API
-            focusView?.requestFocus()
-
-        }
-
-    }
 
 }
