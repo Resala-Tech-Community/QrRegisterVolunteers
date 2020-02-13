@@ -23,7 +23,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
 
     override val vm: EventListVm by viewModel()
     override var layoutId: Int = R.layout.frag_events
-    protected var mEventList: ArrayList<EventPOJO>? = null
+    private var mEventList: ArrayList<EventPOJO>? = null
     private var eventadapter: EventsAdapter<EventPOJO>? = null
     private lateinit var viewDataBinding: FragEventsBinding
 
