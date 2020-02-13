@@ -29,7 +29,7 @@
 
     <fragment
             android:id="@+id/eventsFrag"
-            android:name="com.resala.mobile.qrregister.ui.eventsfragment.EventListFrag"
+            android:name="com.resala.mobile.qrregister.ui.eventsFragment.EventListFrag"
             android:label="Events"
             tools:layout="@layout/frag_events">
 

@@ -6,7 +6,7 @@
 package com.resala.mobile.qrregister.shared.koin
 
 import android.content.Context
-import com.resala.mobile.qrregister.ui.eventsfragment.eventModule
+import com.resala.mobile.qrregister.ui.eventsFragment.eventModule
 
 import com.resala.mobile.qrregister.ui.loginfragment.loginModule
 import com.resala.mobile.qrregister.ui.navhostactivity.navHostActivityModule
