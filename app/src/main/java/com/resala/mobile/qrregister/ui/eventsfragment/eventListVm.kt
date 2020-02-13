@@ -20,27 +20,5 @@ val eventModule = module {
 
 class EventListVm(dataManager: DataManager) : BaseViewModel(dataManager) {
     lateinit var responseBody: MutableLiveData<ResponseBody>
-
-    @SuppressLint("CheckResult")
-    fun getEvents() {
-        responseBody.value = ResponseBody(isLoading = true)
-
-        api.getEvents()
-            .subscribeOn(scheduler.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
-                responseBody.value = ResponseBody(eventList = result)
-            }, { throwable ->
-                responseBody.value = ResponseBody(errorMessage = throwable)
-            }, {
-                responseBody.value = ResponseBody(isLoading = false)
-            })
-    }
-
-    data class ResponseBody(
-        val eventList: List<EventPOJO> = emptyList(),
-        val isLoading: Boolean = false,
-        val errorMessage: Throwable? = null
-    )
-
+ 
 }
