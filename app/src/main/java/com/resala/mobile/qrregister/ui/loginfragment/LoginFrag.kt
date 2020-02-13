@@ -71,6 +71,7 @@ class LoginFrag : BaseFrag<LoginVm>() {
         idEditText.setText("resala@gmail.com")
         passwordEditText.setText("resala@123")
     }
+ 
 
     private fun setupLogin() {
         vm.login.observe(this, Observer {
@@ -91,6 +92,7 @@ class LoginFrag : BaseFrag<LoginVm>() {
                     activity()?.hideProgressBar()
                 }
 
+ 
                 it.isLoading -> {
                     activity()?.showProgressBar()
                 }
@@ -103,6 +105,7 @@ class LoginFrag : BaseFrag<LoginVm>() {
     fun checkValidations(idEdt: EditText, passwordEdt: EditText) {
         var focusView: View? = null
         var cancel = false
+ 
 
         if (isNullOrEmpty(idEdt.text.toString())) {
             //Take Action
@@ -135,23 +138,5 @@ class LoginFrag : BaseFrag<LoginVm>() {
 
     }
 
-    fun checkValidations(idEdt: EditText, passwordEdt: EditText) {
-        var focusView: View? = null
-
-        if (!isNullOrEmpty(idEdt.text.toString())) {
-            //Take Action
-            idEdt.error = "Required"
-            focusView = idEdt
-        } else if (!isNullOrEmpty(passwordEdt.text.toString())) {
-            //Take Action
-            passwordEdt.error = "Required"
-            focusView = passwordEdt
-        } else {
-            //request Login API
-            focusView?.requestFocus()
-
-        }
-
-    }
 
 }
