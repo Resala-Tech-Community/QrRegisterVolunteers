@@ -16,26 +16,6 @@ class EventListFrag : BaseFrag<EventListVm>() {
     override val vm: EventListVm by viewModel()
     override var layoutId: Int = R.layout.activity_base // Replace with list layout
 
-
-    override fun doOnViewCreated() {
-        super.doOnViewCreated()
-
-        getEventList()
-
-    }
-
-    private fun getEventList() {
-        vm.responseBody.observe(
-            this,
-            Observer {
-                //Here Travers Through Model Values
-            }
-        )
-
-
-        vm.getEvents()
-
-    }
-
+ 
 
 }
