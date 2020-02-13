@@ -71,6 +71,7 @@ class LoginFrag : BaseFrag<LoginVm>() {
         idEditText.setText("resala@gmail.com")
         passwordEditText.setText("resala@123")
     }
+ 
 
     private fun setupLogin() {
         vm.login.observe(this, Observer {
@@ -91,6 +92,7 @@ class LoginFrag : BaseFrag<LoginVm>() {
                     activity()?.hideProgressBar()
                 }
 
+ 
                 it.isLoading -> {
                     activity()?.showProgressBar()
                 }
@@ -103,6 +105,7 @@ class LoginFrag : BaseFrag<LoginVm>() {
     fun checkValidations(idEdt: EditText, passwordEdt: EditText) {
         var focusView: View? = null
         var cancel = false
+ 
 
         if (isNullOrEmpty(idEdt.text.toString())) {
             //Take Action
