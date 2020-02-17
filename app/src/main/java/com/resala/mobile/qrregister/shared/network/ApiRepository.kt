@@ -11,7 +11,7 @@ import com.resala.mobile.qrregister.shared.data.model.NormalResponse
 import io.reactivex.Observable
 
 
-class ApiRepository(private val api: ApiInterface) {
+class ApiRepository(private val api: ApiInterface,private val api2: ApiInterface2) {
 
     fun login(id: String, password: String): Observable<NormalResponse> {
         return api.logIn(id, password)
@@ -21,5 +21,42 @@ class ApiRepository(private val api: ApiInterface) {
         return api.getEvents()
     }
 
+    fun getEventById(id: String): Observable<EventPOJO> {
+        return api.getEventById(id)
+    }
+
+    fun registerVolunteerByCode(
+        branchId: String,
+        code: String,
+        eventId: String,
+        phone: String
+    ): Observable<NormalResponse> {
+        return api2.registerVolunteerByCode(
+            branchId,
+            code,
+            eventId,
+            phone
+        )
+    }
+
+    fun registerVolunteerByData(
+        EMail: String,
+        branchId: String,
+        eventId: String,
+        gender: String,
+        name: String,
+        phoneNumber: String,
+        regionId: String
+    ): Observable<NormalResponse> {
+        return api2.registerVolunteerByData(
+            EMail,
+            branchId,
+            eventId,
+            gender,
+            name,
+            phoneNumber,
+            regionId
+        )
+    }
 
 }

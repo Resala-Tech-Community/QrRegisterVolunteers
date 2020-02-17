@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragEventsBinding
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
@@ -23,7 +24,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
 
     override val vm: EventListVm by viewModel()
     override var layoutId: Int = R.layout.frag_events
-    protected var mEventList: ArrayList<EventPOJO>? = null
+    private var mEventList: ArrayList<EventPOJO>? = null
     private var eventadapter: EventsAdapter<EventPOJO>? = null
     private lateinit var viewDataBinding: FragEventsBinding
 
@@ -55,7 +56,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
     }
 
     private fun checkValidation() {
-        hasToolBar = true
+
         if (Utils.isOnline(activity())) {
             setupListAdapter()
             getEventList()
@@ -116,14 +117,13 @@ open class EventListFrag : BaseFrag<EventListVm>() {
 
     private fun onEventClicked(event: EventPOJO) {
 
-//        val action =
-//            EventListFragDirections.actionEventsFragToEventDetailsFrag(
-//                event.id.toString(),
-//                event.name
-//            )
-//        if (findNavController().currentDestination?.id == R.id.eventsFrag) {
-//            findNavController().navigate(action)
-//        }
+        val action = EventListFragDirections.actionEventsFragToEventDetailsFrag(
+            event.id.toString(),
+            event.name
+        )
+        if (findNavController().currentDestination?.id == R.id.eventsFrag) {
+            findNavController().navigate(action)
+        }
     }
 
 

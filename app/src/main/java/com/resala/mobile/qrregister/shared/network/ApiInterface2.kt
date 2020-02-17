@@ -1,5 +1,5 @@
 /*
- * Created by  Mobile Dev Team  on 1/11/20 9:35 AM
+ * Created by  Mobile Dev Team  on 2/17/20 4:23 PM
  * Copyright (c) Resala Charity Organization. All rights reserved.
  */
 
@@ -12,28 +12,9 @@ import io.reactivex.Observable
 import retrofit2.http.*
 
 
-interface ApiInterface {
+interface ApiInterface2 {
 
-    @FormUrlEncoded
-    @POST("")
-    fun logIn(
-        @Field("id") email: String,
-        @Field("password") password: String
-    ): Observable<NormalResponse>
 
-    @FormUrlEncoded
-    @POST("")
-    fun logOut(
-        @Field("id") email: String
-    ): Observable<NormalResponse>
-
-    @GET("event/all")
-    fun getEvents(): Observable<List<EventPOJO>>
-
-    @GET("event/{id}")
-    fun getEventById(
-        @Path("id") id: String
-    ): Observable<EventPOJO>
 
     @FormUrlEncoded
     @POST("registration/volunteer")

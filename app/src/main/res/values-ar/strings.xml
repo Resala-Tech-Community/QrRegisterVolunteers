@@ -26,7 +26,7 @@
     <string name="forgot">نسيت كلمة المرور؟</string>
     <string name="sign_in">تسجيل الدخول</string>
     <string name="please_grant_camera_permission">Please grant camera Permession</string>
-    <string name="vid">Volunteer ID</string>
+    <string name="vidphone">الرقم التعريفي/الهاتف</string>
     <string name="register_volunteer_by_scanning_qr_code_or_by_id">Register Volunteer by scanning QR code or by ID</string>
     <string name="register">register</string>
     <string name="first_name">First Name</string>
@@ -39,5 +39,6 @@
     <string name="drag_to_register_new_volunteer">Drag to register new Volunteer</string>
     <string name="timeout">Connection timeout</string>
     <string name="device_is_offline">Device is offline!</string>
+    <string name="send">send</string>
 
 </resources>

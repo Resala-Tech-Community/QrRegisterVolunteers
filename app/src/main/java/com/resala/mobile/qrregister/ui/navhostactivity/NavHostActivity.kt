@@ -23,7 +23,7 @@ class NavHostActivity : RunTimePermissionParentActivity() {
 
     override fun doOnCreate() {
         super.doOnCreate()
-//        setSupportActionBar(findViewById(R.id.toolbar))
+        setSupportActionBar(findViewById(R.id.toolbar))
 //
 //        val navController: NavController = findNavController(R.id.nav_host_fragment)
 //        appBarConfiguration =

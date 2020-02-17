@@ -9,6 +9,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+/* "id": 4,
+        "eventDate": "05/02/2020",
+        "name": "test event 4",
+        "startTime": "09:00",
+        "lastTimeToReg": "10:00"*/
 
 @Entity
 data class EventPOJO constructor(
@@ -17,27 +22,18 @@ data class EventPOJO constructor(
     var id: Int,
     @SerializedName("name")
     var name: String,
-    @SerializedName("branch")
-    var branch: String,
-    @SerializedName("date")
-    var date: String
+    @SerializedName("eventDate")
+    var date: String,
+    @SerializedName("startTime")
+    var startTime: String,
+    @SerializedName("lastTimeToReg")
+    var lastTimeToReg: String
 
 ) {
 
-    val titleForList: String
-        get() = if (name.isNotEmpty()) name else branch
+//    val time: String
+//        get() = if (date.isNotEmpty()) "11:30" else startTime
 
-    val branchForList: String
-        get() = if (branch.isNotEmpty()) branch else branch
-
-    val dateForList: String
-        get() = if (date.isNotEmpty()) date else branch
-
-    val time: String
-        get() = if (date.isNotEmpty()) "11:30" else branch
-
-    val meridian: String
-        get() = if (date.isNotEmpty()) "AM" else branch
 
 }
 

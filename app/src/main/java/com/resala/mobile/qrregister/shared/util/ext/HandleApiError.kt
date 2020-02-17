@@ -24,7 +24,8 @@ fun Throwable.showError(context: Context): Boolean {
                 this.response()?.errorBody()?.charStream(),
                 NormalResponse::class.java
             )
-            FlashbarUtil.show(errorResponse.message, activity = context as Activity)
+            if (errorResponse != null)
+                FlashbarUtil.show(errorResponse.message.let { it }, activity = context as Activity)
         }
         is TimeoutException -> FlashbarUtil.show(
             context.getString(R.string.timeout),
