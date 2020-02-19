@@ -7,6 +7,7 @@ package com.resala.mobile.qrregister.ui.loginfragment
 
  
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,6 +75,7 @@ class LoginFrag : BaseFrag<LoginVm>() {
  
 
     private fun setupLogin() {
+        viewDataBinding.passwordEditText.transformationMethod = PasswordTransformationMethod()
         vm.login.observe(this, Observer {
             checkValidations(idEditText, passwordEditText)
         })

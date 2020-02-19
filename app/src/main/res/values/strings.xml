@@ -39,5 +39,13 @@
     <string name="timeout">Connection timeout</string>
     <string name="device_is_offline">Device is offline!</string>
     <string name="send">send</string>
+    <string name="branch_id">Branch ID</string>
+    <string name="event_id">Event ID</string>
+    <string name="name">Name</string>
+    <string name="region_id">Region ID</string>
+    <string name="logout">Logout</string>
+    <string name="Are_you_sure_want_to_logout">Are you sure want to logout ?</string>
+    <string name="Confirm">Confirm</string>
+    <string name="Cancel">Cancel</string>
 
 </resources>

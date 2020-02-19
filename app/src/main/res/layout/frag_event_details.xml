@@ -81,7 +81,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
-                                android:hint="Code/ID"
+                                android:hint="كود / ID"
+
+                                android:imeOptions="actionDone"
                                 android:inputType="text"
                                 android:textColor="@color/white"
                                 android:textColorHint="@android:color/white" />
@@ -121,7 +123,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
-                                android:hint="Mobile Number"
+                                android:hint="رقم الهاتف المحمول"
+                                android:imeOptions="actionDone"
                                 android:inputType="phone"
                                 android:textColor="@color/white"
                                 android:textColorHint="@android:color/white" />
@@ -181,13 +184,6 @@
                     android:background="@color/resala_blue"
                     android:visibility="@{viewmodel.ishShowDots ? View.VISIBLE : View.GONE}" />
 
-            <View
-                    android:id="@+id/reveelView"
-                    android:layout_width="@dimen/_220sdp"
-                    android:layout_height="@dimen/_170sdp"
-                    android:layout_gravity="center"
-                    android:background="@color/resala_semi_blue"
-                    android:visibility="@{viewmodel.toggleReveelView ? View.VISIBLE : View.GONE}" />
 
             <FrameLayout
                     android:id="@+id/dialogFrame"

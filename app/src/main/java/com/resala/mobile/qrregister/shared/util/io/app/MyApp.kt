@@ -11,11 +11,11 @@ import android.content.Context
 import android.util.Log
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
-import com.resala.mobile.qrregister.shared.koin.KoinHelper
-
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
+import com.resala.mobile.qrregister.shared.koin.KoinHelper
+import com.resala.mobile.qrregister.shared.util.LanguagePrfs
 
 class MyApp : Application() {
 
@@ -39,6 +39,7 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+
         //updateAndroidSecurityProvider()
         try {
             KoinHelper.start(this)

@@ -7,10 +7,12 @@ package com.resala.mobile.qrregister.ui.eventsfragment
 
 
 import Utils
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.resala.mobile.qrregister.R
@@ -20,6 +22,7 @@ import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
 import com.resala.mobile.qrregister.shared.util.ext.showError
 import org.koin.android.viewmodel.ext.android.viewModel
 
+
 open class EventListFrag : BaseFrag<EventListVm>() {
 
     override val vm: EventListVm by viewModel()
@@ -27,6 +30,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
     private var mEventList: ArrayList<EventPOJO>? = null
     private var eventadapter: EventsAdapter<EventPOJO>? = null
     private lateinit var viewDataBinding: FragEventsBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +41,17 @@ open class EventListFrag : BaseFrag<EventListVm>() {
             viewmodel = vm
         }
 
-        setHasOptionsMenu(true)
         return viewDataBinding.root
     }
 
 
     override fun doOnViewCreated() {
         super.doOnViewCreated()
+        viewDataBinding.toolbar.inflateMenu(R.menu.logout_menu)
+        viewDataBinding.toolbar.menu.findItem(R.id.logout).setOnMenuItemClickListener {
+            showLogout()
+            return@setOnMenuItemClickListener true
+        }
         checkValidation()
     }
 
@@ -125,6 +133,35 @@ open class EventListFrag : BaseFrag<EventListVm>() {
             findNavController().navigate(action)
         }
     }
+
+
+    fun showLogout() {
+
+        val dialogBuilder = AlertDialog.Builder(activity())
+        // ...Irrelevant code for customizing the buttons and title
+        val inflater = activity()!!.layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_logout, null)
+        dialogBuilder.setView(dialogView)
+
+        val tv_confirm = dialogView.findViewById(R.id.tv_logout_confirm) as TextView
+        val tv_cancle = dialogView.findViewById(R.id.tv_logout_cancel) as TextView
+
+
+        val alertDialog = dialogBuilder.create()
+        alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.window!!.attributes.windowAnimations = R.style.DialougAnimation
+        alertDialog.show()
+
+        tv_confirm.setOnClickListener {
+            alertDialog.dismiss()
+            //doLogout()
+        }
+
+        tv_cancle.setOnClickListener { alertDialog.dismiss() }
+
+    }
+
+
 
 
 }

@@ -6,8 +6,6 @@
 package com.resala.mobile.qrregister.ui.eventdetailsfragment
 
 import android.Manifest
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
@@ -16,7 +14,6 @@ import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
@@ -290,36 +287,6 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             viewDataBinding.btnSendCodeOrID.visibility = View.GONE
         else
             viewDataBinding.btnSendCodeOrID.visibility = View.VISIBLE
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun enterReveal(myView: View, rawResult: Result) { // previously invisible view
-        // get the center for the clipping circle
-        val cx = myView.measuredWidth / 2
-        val cy = myView.measuredHeight / 2
-        // get the final radius for the clipping circle
-        val finalRadius = Math.max(myView.width, myView.height) / 2
-        // create the animator for this view (the start radius is zero)
-        val anim =
-            ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0f, finalRadius.toFloat())
-        // make the view visible and start the animation
-
-        vm.toggleRevealView(true)
-        anim.start()
-        // make the view invisible when the animation is done
-        anim.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-
-                vm.toggleRevealView(false)
-                showSuccessDialog()
-                FlashbarUtil.show(
-                    "Contents = " + rawResult.text + ", Format = " + rawResult.barcodeFormat.toString(),
-                    activity = activity()!!
-                )
-            }
-        })
-
     }
 
     companion object {

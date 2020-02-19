@@ -20,25 +20,34 @@
     <string name="cannotpost_while_offline">لا يمكن النشر بدون انترنت</string>
     <string name="cannotdelete_while_offline">لا يمكن المسح بدون انترنت</string>
     <string name="cannotedit_while_offline">لا يمكن التعديل بدون انترنت</string>
-    <string name="loading">loading</string>
+    <string name="loading">تحميل</string>
     <string name="id">الرقم التعريفي</string>
     <string name="password">كلمة المرور</string>
     <string name="forgot">نسيت كلمة المرور؟</string>
     <string name="sign_in">تسجيل الدخول</string>
     <string name="please_grant_camera_permission">Please grant camera Permession</string>
     <string name="vidphone">الرقم التعريفي/الهاتف</string>
-    <string name="register_volunteer_by_scanning_qr_code_or_by_id">Register Volunteer by scanning QR code or by ID</string>
-    <string name="register">register</string>
+    <string name="register_volunteer_by_scanning_qr_code_or_by_id">قم بتسجيل المتطوع بفصح رمز الاستجابة السريعة او كتابة الهاتف/الكود</string>
+    <string name="register">تسجيل</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="email_address">Email Address</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="address_line">Address Line</string>
+    <string name="email_address">البريد الاليكتروني</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="address_line">العنوان</string>
 
-    <string name="please_fill_in_the_following_fields">Please Fill in the following fields</string>
-    <string name="drag_to_register_new_volunteer">Drag to register new Volunteer</string>
-    <string name="timeout">Connection timeout</string>
-    <string name="device_is_offline">Device is offline!</string>
-    <string name="send">send</string>
+    <string name="please_fill_in_the_following_fields">برجاء أدخال البيانات الخاصة بالمتطوع </string>
+    <string name="drag_to_register_new_volunteer">قم بالسحب لأعلي لتسجيل متطوع جديد</string>
+    <string name="timeout">انتهى وقت محاولة الاتصال</string>
+    <string name="device_is_offline">الجهاز غير متصل!</string>
+    <string name="send">أرسل</string>
+    <string name="branch_id">رقم الفرع</string>
+    <string name="event_id">رقم الحدث</string>
+    <string name="name">الأسم</string>
+    <string name="region_id">رقم المنطقة</string>
+    <string name="logout">تسجيل خروج</string>
+
+    <string name="Are_you_sure_want_to_logout">هل انت متأكد من الخروج؟</string>
+    <string name="Confirm">تأكيد</string>
+    <string name="Cancel">إلغاء</string>
 
 </resources>
