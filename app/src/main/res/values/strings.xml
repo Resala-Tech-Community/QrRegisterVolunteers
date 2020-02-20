@@ -47,5 +47,9 @@
     <string name="Are_you_sure_want_to_logout">Are you sure want to logout ?</string>
     <string name="Confirm">Confirm</string>
     <string name="Cancel">Cancel</string>
+    <string name="required_field">Required</string>
+    <string name="not_valid_mobile">Not a valid mobile number</string>
+    <string name="invalid_email_format">Invalid Email Address</string>
+    <string name="idcode">كود / ID</string>
 
 </resources>

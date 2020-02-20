@@ -11,7 +11,9 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,8 @@ import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragEventsBinding
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
+import com.resala.mobile.qrregister.shared.util.RecyclerSectionItemDecoration
+import com.resala.mobile.qrregister.shared.util.RecyclerSectionItemDecoration.SectionCallback
 import com.resala.mobile.qrregister.shared.util.ext.showError
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -30,7 +34,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
     private var mEventList: ArrayList<EventPOJO>? = null
     private var eventadapter: EventsAdapter<EventPOJO>? = null
     private lateinit var viewDataBinding: FragEventsBinding
-
+    var flagDecoration = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,6 +70,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
     private fun checkValidation() {
 
         if (Utils.isOnline(activity())) {
+            flagDecoration = false
             setupListAdapter()
             getEventList()
 
@@ -87,6 +92,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                         showMainLayout()
                         mEventList?.clear()
                         mEventList?.addAll(it.eventList)
+                        setUpStickyHeaders(mEventList)
                         eventadapter!!.notifyDataSetChanged()
                         hideLoading()
                     }
@@ -108,12 +114,48 @@ open class EventListFrag : BaseFrag<EventListVm>() {
     }
 
 
+    private fun setUpStickyHeaders(mEventList: ArrayList<EventPOJO>?) {
+
+        val headers: MutableMap<String, Int> = mutableMapOf()
+        mEventList?.forEachIndexed { index, eventPOJO ->
+            if (!headers.containsKey(eventPOJO.date))
+                headers[eventPOJO.date] = index
+        }
+
+
+        val sectionItemDecoration =
+            RecyclerSectionItemDecoration(
+                resources.getDimensionPixelSize(R.dimen._40sdp),
+                true,  // true for sticky, false for not
+                object : SectionCallback {
+                    override fun isSection(position: Int): Boolean {
+                        return (headers.values.contains(position))
+                    }
+
+                    override fun getSectionHeader(position: Int): CharSequence {
+                        return mEventList?.get(position)
+                            ?.date!!.subSequence(0, mEventList[position].date.length)
+
+                    }
+                })
+
+
+
+        if (!flagDecoration) {
+            viewDataBinding.eventsList.addItemDecoration(sectionItemDecoration)
+            flagDecoration = true
+        }
+
+    }
+
+
     private fun setupListAdapter() {
         mEventList = ArrayList()
         val viewModel = viewDataBinding.viewmodel
         if (viewModel != null) {
             eventadapter = EventsAdapter(mEventList!!, ::onEventClicked)
             viewDataBinding.eventsList.adapter = eventadapter
+
         }
     }
 
@@ -160,8 +202,6 @@ open class EventListFrag : BaseFrag<EventListVm>() {
         tv_cancle.setOnClickListener { alertDialog.dismiss() }
 
     }
-
-
 
 
 }

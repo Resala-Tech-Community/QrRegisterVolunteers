@@ -70,8 +70,8 @@
                             android:layout_height="@dimen/_10sdp" />
 
                     <TextView
-                            style="@style/TextViewStyle"
                             android:id="@+id/drag_txt"
+                            style="@style/TextViewStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -81,8 +81,8 @@
                             android:visibility="@{viewmodel.isSheetHidden ? View.VISIBLE : View.GONE}" />
 
                     <TextView
-                            style="@style/TextViewStyle"
                             android:id="@+id/fill_txt"
+                            style="@style/TextViewStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/please_fill_in_the_following_fields"
@@ -112,79 +112,7 @@
                             android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/etInputId"
-                                style="@style/TextInputLayoutStyle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/email_address">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/etEmail"
-                                    style="@style/EditTextStyle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
-
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <Space
-                                android:layout_width="0dp"
-                                android:layout_height="@dimen/_10sdp" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                                style="@style/TextInputLayoutStyle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/branch_id">
-
-
-                            <EditText
-                                    android:id="@+id/etBranchId"
-                                    style="@style/EditTextStyle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <Space
-                                android:layout_width="0dp"
-                                android:layout_height="@dimen/_10sdp" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                                style="@style/TextInputLayoutStyle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/event_id">
-
-
-                            <EditText
-                                    android:id="@+id/etEventId"
-                                    style="@style/EditTextStyle"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <Space
-                                android:layout_width="0dp"
-                                android:layout_height="@dimen/_15sdp" />
-
-
-                        <Spinner
-                                android:id="@+id/spinnerGender"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:entries="@array/gender"
-                                android:spinnerMode="dropdown" />
-
-                        <Space
-                                android:layout_width="0dp"
-                                android:layout_height="@dimen/_15sdp" />
-
-                        <com.google.android.material.textfield.TextInputLayout
+                              android:id="@+id/edInputName"
                                 style="@style/TextInputLayoutStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -206,6 +134,7 @@
                                 android:layout_height="@dimen/_10sdp" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/edInputPhoneId"
                                 style="@style/TextInputLayoutStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -226,7 +155,61 @@
                                 android:layout_height="@dimen/_10sdp" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/etInputEmail"
                                 style="@style/TextInputLayoutStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/email_address">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etEmail"
+                                    style="@style/EditTextStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <Space
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_10sdp" />
+
+                        <Spinner
+                                android:id="@+id/spinnerGender"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:entries="@array/gender"
+                                android:spinnerMode="dropdown" />
+
+                        <Space
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_15sdp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                                style="@style/TextInputLayoutStyle"
+                                android:id="@+id/edInputBranchId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/branch_id">
+
+
+                            <EditText
+                                    android:id="@+id/etBranchId"
+                                    style="@style/EditTextStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <Space
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_10sdp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                                style="@style/TextInputLayoutStyle"
+                               android:id="@+id/edInputRegionId"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/region_id">
@@ -245,6 +228,29 @@
                         <Space
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_10sdp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                             android:id="@+id/edInputEventId"
+                                style="@style/TextInputLayoutStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/event_id">
+
+
+                            <EditText
+                                    android:id="@+id/etEventId"
+                                    style="@style/EditTextStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <Space
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_15sdp" />
+
+
                     </LinearLayout>
 
 

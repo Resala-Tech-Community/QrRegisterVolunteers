@@ -27,7 +27,7 @@
     <string name="sign_in">تسجيل الدخول</string>
     <string name="please_grant_camera_permission">Please grant camera Permession</string>
     <string name="vidphone">الرقم التعريفي/الهاتف</string>
-    <string name="register_volunteer_by_scanning_qr_code_or_by_id">قم بتسجيل المتطوع بفصح رمز الاستجابة السريعة او كتابة الهاتف/الكود</string>
+    <string name="register_volunteer_by_scanning_qr_code_or_by_id">قم بتسجيل المتطوع بفحص رمز الاستجابة السريعة او كتابة الهاتف/الكود</string>
     <string name="register">تسجيل</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -49,5 +49,9 @@
     <string name="Are_you_sure_want_to_logout">هل انت متأكد من الخروج؟</string>
     <string name="Confirm">تأكيد</string>
     <string name="Cancel">إلغاء</string>
+    <string name="required_field">حقل مطلوب</string>
+    <string name="not_valid_mobile">رقم الهاتف غير صحيح</string>
+    <string name="invalid_email_format">البريد الايكتروني غير صحيح</string>
+    <string name="idcode">كود / ID</string>
 
 </resources>

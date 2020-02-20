@@ -5,6 +5,7 @@
 
 package com.resala.mobile.qrregister.ui.eventdetailsfragment
 
+import Utils
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -29,6 +30,8 @@ import com.resala.mobile.qrregister.shared.dialogs.DialogScanSuccessFragment
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
 import com.resala.mobile.qrregister.shared.util.FlashbarUtil
 import com.resala.mobile.qrregister.shared.util.ext.showError
+import com.resala.mobile.qrregister.shared.util.isNullOrEmpty
+import com.resala.mobile.qrregister.shared.util.isPhoneNumber
 import kotlinx.android.synthetic.main.sheet_new_vlounteer.view.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -249,16 +252,131 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
 
         }
         viewDataBinding.btnSendCodeOrID.setOnClickListener {
+
             vm.registerVolunteerByCodeOrNumber("1", "1", "1", "")
+
         }
 
         viewDataBinding.btnSendNumber.setOnClickListener {
             vm.registerVolunteerByCodeOrNumber("1", "", "1", "010")
+//            when {
+//
+//                !isPhoneNumber(
+//                    viewDataBinding.btnSendNumber.text.toString()
+//                ) -> {
+//
+//                    viewDataBinding.btnSendNumber.error = getString(R.string.not_valid_mobile)
+//
+//                }
+//                else -> {
+//                    viewDataBinding.btnSendNumber.error = null
+//                    vm.registerVolunteerByCodeOrNumber("1", "", "1", "010")
+//                }}
         }
+
 
 
         viewDataBinding.newVolunteerSheet.btnRegisterData.setOnClickListener {
             //introduce data validation before registering
+            checkDataValidations()
+
+        }
+
+
+    }
+
+    fun checkDataValidations() {
+        var focusView: View? = null
+        var cancel = false
+
+
+        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etEmail.text.toString())) {
+
+            viewDataBinding.newVolunteerSheet.etInputEmail.error =
+                getString(R.string.required_field)
+            focusView = viewDataBinding.newVolunteerSheet.etEmail
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.etInputEmail.error = null
+        }
+
+        if (!Utils.isEmailValidDefault(viewDataBinding.newVolunteerSheet.etEmail.text.toString())) {
+            viewDataBinding.newVolunteerSheet.etInputEmail.error =
+                getString(R.string.invalid_email_format)
+            focusView = viewDataBinding.newVolunteerSheet.etEmail
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.etInputEmail.error = null
+        }
+
+        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etBranchId.text.toString())) {
+            viewDataBinding.newVolunteerSheet.edInputBranchId.error =
+                getString(R.string.required_field)
+            focusView = viewDataBinding.newVolunteerSheet.etBranchId
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.edInputBranchId.error = null
+        }
+
+        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etEventId.text.toString())) {
+            viewDataBinding.newVolunteerSheet.edInputBranchId.error =
+                getString(R.string.required_field)
+            focusView = viewDataBinding.newVolunteerSheet.etEventId
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.edInputBranchId.error = null
+        }
+
+
+        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etName.text.toString())) {
+            viewDataBinding.newVolunteerSheet.edInputName.error = getString(R.string.required_field)
+            focusView = viewDataBinding.newVolunteerSheet.etName
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.edInputName.error = null
+        }
+
+
+        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etPhoneNumber.text.toString())) {
+            viewDataBinding.newVolunteerSheet.edInputPhoneId.error =
+                getString(R.string.required_field)
+            focusView = viewDataBinding.newVolunteerSheet.etPhoneNumber
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.edInputPhoneId.error = null
+        }
+
+        if (!isPhoneNumber(viewDataBinding.newVolunteerSheet.etPhoneNumber.text.toString())) {
+            viewDataBinding.newVolunteerSheet.edInputPhoneId.error =
+                getString(R.string.not_valid_mobile)
+            focusView = viewDataBinding.newVolunteerSheet.etPhoneNumber
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.edInputPhoneId.error = null
+        }
+
+        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etRegionId.text.toString())) {
+            viewDataBinding.newVolunteerSheet.edInputRegionId.error =
+                getString(R.string.required_field)
+            focusView = viewDataBinding.newVolunteerSheet.etRegionId
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.edInputRegionId.error = null
+        }
+
+
+        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etEventId.text.toString())) {
+            viewDataBinding.newVolunteerSheet.edInputEventId.error =
+                getString(R.string.required_field)
+            focusView = viewDataBinding.newVolunteerSheet.etEventId
+            cancel = true
+        } else {
+            viewDataBinding.newVolunteerSheet.edInputEventId.error = null
+        }
+        if (cancel) {
+            focusView?.requestFocus()
+        } else {
+
             vm.registerVolunteerByData(
                 viewDataBinding.newVolunteerSheet.etEmail.text.toString(),
                 viewDataBinding.newVolunteerSheet.etBranchId.text.toString(),
@@ -270,12 +388,10 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
 
             )
         }
-
-
     }
 
-
     private fun registerNumberBtnVisibilty(text: CharSequence?) {
+        viewDataBinding.btnSendNumber.error = null
         if (text.isNullOrEmpty())
             viewDataBinding.btnSendNumber.visibility = View.GONE
         else
