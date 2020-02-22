@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,8 +12,8 @@
 
     <LinearLayout
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
             android:orientation="horizontal"
@@ -25,24 +26,72 @@
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-            <TextView
-                    style="@style/TextViewStyle"
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/circle_bullet"
+                        android:tint="@color/start_event" />
+
+                <View
+                        android:layout_width="2dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@color/btn_semi_grey" />
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/circle_bullet"
+
+                        android:tint="@color/resala_red" />
+
+            </LinearLayout>
+
+            <Space
+                    android:layout_width="@dimen/_5sdp"
+                    android:layout_height="0dp" />
+
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{event.time}"
-                    android:textColor="@color/resala_blue"
-                    android:textSize="@dimen/_16sdp" />
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <TextView
-                    style="@style/TextViewStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{event.meridian}"
-                    android:textColor="@color/resala_blue"
-                    android:textSize="@dimen/_14sdp" />
+                <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:maxEms="2"
+                        android:text="@{event.startTime}"
+                        android:textColor="@color/resala_blue"
+                        android:textSize="@dimen/_14sdp"
+                        tools:text="10:00 AM" />
+
+                <Space
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_10sdp" />
+
+                <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:maxEms="2"
+                        android:text="@{event.lastTimeToReg}"
+                        android:textColor="@color/resala_blue"
+                        android:textSize="@dimen/_14sdp"
+                        tools:text="01:00 PM" />
+
+            </LinearLayout>
         </LinearLayout>
 
         <Space
@@ -51,9 +100,8 @@
 
         <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-
                 android:orientation="vertical">
 
             <TextView
@@ -61,7 +109,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{event.name}"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_16sdp"
+                    tools:text="@string/internet_connection_has_been_lost" />
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -72,8 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/circle_bullet"
-                        android:textColor="@color/resala_blue"
-                        android:textSize="@dimen/_14sdp" />
+                        android:textColor="@color/resala_blue" />
 
                 <Space
                         android:layout_width="@dimen/_5sdp"
@@ -83,14 +131,15 @@
                         style="@style/TextViewStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{event.branch}"
-                        android:textColor="@color/btn_semi_grey" />
+                        android:text="@{event.date}"
+                        android:textColor="@color/warm_grey"
+                        tools:text="@string/internet_connection_has_been_lost" />
 
             </LinearLayout>
         </LinearLayout>
 
         <Space
-                android:layout_width="@dimen/_10sdp"
+                android:layout_width="@dimen/_5sdp"
                 android:layout_height="0dp" />
 
         <ImageView
@@ -101,7 +150,7 @@
                 app:srcCompat="@drawable/ic_fullscreen_black_24dp" />
 
         <Space
-                android:layout_width="@dimen/_10sdp"
+                android:layout_width="@dimen/_5sdp"
                 android:layout_height="0dp" />
 
     </LinearLayout>

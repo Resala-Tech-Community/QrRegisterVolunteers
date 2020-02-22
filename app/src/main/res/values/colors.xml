@@ -11,10 +11,11 @@
     <color name="black_effective">#000000</color>
     <color name="btn_semi_grey">#80BBBBBB</color>
     <color name="btn_semi_red">#80EB595F</color>
-
+    <color name="divider_grey">#BBBBBB</color>
     <color name="resala_red">#D52929</color>
     <color name="resala_blue">#2B2E7F</color>
     <color name="resala_semi_blue">#812B2E7F</color>
     <color name="overlay_light_30">#4DFFFFFF</color>
     <color name="color_opacity_black">#9c000000</color>
+    <color name="start_event">#C0D619</color>
 </resources>

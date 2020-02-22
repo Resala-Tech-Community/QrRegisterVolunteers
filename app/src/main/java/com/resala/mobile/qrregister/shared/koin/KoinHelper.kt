@@ -6,6 +6,7 @@
 package com.resala.mobile.qrregister.shared.koin
 
 import android.content.Context
+import com.resala.mobile.qrregister.ui.eventdetailsfragment.eventDetailsVmModule
 import com.resala.mobile.qrregister.ui.eventsfragment.eventModule
 
 import com.resala.mobile.qrregister.ui.loginfragment.loginModule
@@ -23,7 +24,8 @@ class KoinHelper {
                         appModule,
                         navHostActivityModule,
                         loginModule,
-                        eventModule
+                        eventModule,
+                        eventDetailsVmModule
 
 
 

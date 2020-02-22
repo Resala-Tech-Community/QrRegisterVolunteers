@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by  Mobile Dev Team  on 2/20/20 10:12 AM
+  ~ Copyright (c) Resala Charity Organization. All rights reserved.
+  -->
+
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_item_section_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/divider_grey"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="20/03/1993"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp" />

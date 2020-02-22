@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by  Mobile Dev Team  on 2/17/20 11:48 AM
+  ~ Copyright (c) Resala Charity Organization. All rights reserved.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewmodel"
+                type="com.resala.mobile.qrregister.ui.eventdetailsfragment.EventDetailsVm" />
+
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                android:gravity="center"
+                android:visibility="visible"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <FrameLayout
+                    android:id="@+id/contentFrame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_15sdp"
+                    android:visibility="visible">
+
+                <TextView
+                        style="@style/TextViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/register_volunteer_by_scanning_qr_code_or_by_id"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold" />
+
+                <Space
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_5sdp" />
+
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                    <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                        <EditText
+                                android:id="@+id/etId"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:hint="@string/idcode"
+
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
+                                android:textColor="@color/white"
+                                android:textColorHint="@android:color/white" />
+
+                        <TextView
+                                android:id="@+id/btnSendCodeOrID"
+                                style="@style/TextViewStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|end"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_marginRight="@dimen/_10sdp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:text="@string/send"
+                                android:background="@drawable/btn_send_code"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold"
+                                android:visibility="gone" />
+                    </FrameLayout>
+
+                    <Space
+                            android:layout_width="@dimen/_5sdp"
+                            android:layout_height="0dp" />
+
+                    <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1">
+
+                        <EditText
+                                android:id="@+id/etNumber"
+                                style="@style/EditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="0dp"
+                                android:hint="رقم الهاتف"
+                                android:imeOptions="actionDone"
+                                android:inputType="phone"
+                                android:textColor="@color/white"
+                                android:textColorHint="@android:color/white" />
+
+                        <TextView
+                                android:id="@+id/btnSendNumber"
+                                style="@style/TextViewStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|end"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_marginRight="@dimen/_10sdp"
+                                android:background="@drawable/btn_send_mobile"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:text="@string/send"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold"
+                                android:visibility="gone" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--new volunteer bottom sheet -->
+            <include
+                    android:id="@+id/new_volunteer_sheet"
+                    layout="@layout/sheet_new_vlounteer"
+                    app:viewmodel="@{viewmodel}" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_sheet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() -> viewmodel.openSheet()}"
+                    android:tint="@android:color/white"
+                    android:visibility="visible"
+                    app:fabSize="normal"
+                    app:layout_anchor="@id/new_volunteer_sheet"
+                    app:layout_anchorGravity="top|end"
+                    app:rippleColor="@android:color/white"
+                    app:srcCompat="@drawable/ic_drag" />
+
+            <com.resala.mobile.qrregister.shared.util.ViewLoadingDotsFade
+                    android:id="@+id/progressBar"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_gravity="center"
+                    android:background="@color/resala_blue"
+                    android:visibility="@{viewmodel.ishShowDots ? View.VISIBLE : View.GONE}" />
+
+
+            <FrameLayout
+                    android:id="@+id/dialogFrame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+
+</layout>
