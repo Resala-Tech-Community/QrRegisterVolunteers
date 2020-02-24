@@ -21,17 +21,35 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+        <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/white"
-                android:gravity="center"
-                android:visibility="visible"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    android:gravity="end"
+                    android:visibility="visible"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
-        </androidx.appcompat.widget.Toolbar>
+
+            <com.robinhood.ticker.TickerView
+                    android:id="@+id/tickerView"
+                    style="@style/TextViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:background="@drawable/btn_send_code"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:text="0"
+                    android:textColor="@color/white" />
+        </FrameLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -58,7 +76,7 @@
                         android:gravity="center"
                         android:text="@string/register_volunteer_by_scanning_qr_code_or_by_id"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/_10ssp"
+                        android:textSize="@dimen/_9ssp"
                         android:textStyle="bold" />
 
                 <Space
@@ -97,13 +115,13 @@
                                 android:layout_gravity="center_vertical|end"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_marginRight="@dimen/_10sdp"
-                                android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp"
+                                android:background="@drawable/btn_send_code"
                                 android:clickable="true"
                                 android:focusable="true"
                                 android:gravity="center"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
                                 android:text="@string/send"
-                                android:background="@drawable/btn_send_code"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_12ssp"
                                 android:textStyle="bold"

@@ -21,7 +21,7 @@ interface EventItemDao {
     @Delete
     fun deleteItem(item: EventPOJO)
 
-    @Query("SELECT * FROM EventPOJO WHERE id == :id")
+    @Query("SELECT * FROM EventPOJO WHERE eventId == :id")
     fun getItemById(id: Int): EventPOJO
 
     @Query("SELECT * FROM EventPOJO")

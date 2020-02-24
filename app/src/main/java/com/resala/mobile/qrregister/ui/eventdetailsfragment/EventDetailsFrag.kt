@@ -21,40 +21,50 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.*
 import com.google.zxing.Result
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragEventDetailsBinding
+import com.resala.mobile.qrregister.shared.data.model.EventPOJO
 import com.resala.mobile.qrregister.shared.dialogs.DialogScanSuccessFragment
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
 import com.resala.mobile.qrregister.shared.util.FlashbarUtil
 import com.resala.mobile.qrregister.shared.util.ext.showError
 import com.resala.mobile.qrregister.shared.util.isNullOrEmpty
 import com.resala.mobile.qrregister.shared.util.isPhoneNumber
+import com.resala.mobile.qrregister.shared.vm.SharedViewModel
+import com.robinhood.ticker.TickerUtils
+import kotlinx.android.synthetic.main.sheet_new_vlounteer.view.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import org.koin.android.viewmodel.ext.android.viewModel
 
+enum class GenderEnum {
+    MALE,
+    FEMALE
+}
 
 class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHandler {
 
 
     override val vm: EventDetailsVm by viewModel()
     override var layoutId: Int = R.layout.frag_event_details
-
     private var mScannerView: ZXingScannerView? = null
     private lateinit var viewDataBinding: FragEventDetailsBinding
     private var mBehavior: BottomSheetBehavior<*>? = null
-
-
     private var mFirebaseDatabase: DatabaseReference? = null
     private var mFirebaseInstance: FirebaseDatabase? = null
+    private var event: EventPOJO? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         viewDataBinding = FragEventDetailsBinding.inflate(inflater, container, false).apply {
             viewmodel = vm
         }
@@ -62,20 +72,36 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
         // Set the lifecycle owner to the lifecycle of the view
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
         viewDataBinding.executePendingBindings()
+
+
         return viewDataBinding.root
     }
 
     override fun doOnViewCreated() {
         super.doOnViewCreated()
-        initView()
-        checkValidations()
+
+        //to get the shared data between fragments
+        val model = activity()?.let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
+        model?.selected?.observe(this, Observer<EventPOJO> {
+            event = it
+            setToolBar()
+            initView()
+            setupRegisterField()
+            checkValidations()
+
+        })
     }
 
     private fun checkValidations() {
 
         mFirebaseInstance = FirebaseDatabase.getInstance()
         mFirebaseDatabase = mFirebaseInstance?.reference
-            ?.child("1")?.child("1")//branchid/eventid
+            ?.child(event?.branchId.toString())?.child(event?.eventId.toString())
+
+        viewDataBinding.run {
+            tickerView.setCharacterLists(TickerUtils.provideNumberList())
+            tickerView.animationDuration = 600
+        }
         mFirebaseDatabase?.addValueEventListener(object : ValueEventListener {
 
             override fun onCancelled(dataError: DatabaseError) {
@@ -85,7 +111,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val map =
                     dataSnapshot.value as Map<String, Any>?
-                FlashbarUtil.show(map?.get("count").toString(), activity = activity()!!)
+                viewDataBinding.tickerView.text = map?.get("count").toString()
 
             }
 
@@ -107,8 +133,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
     }
 
     private fun initView() {
-        setToolBar()
-        setupRegisterField()
+
         mScannerView = ZXingScannerView(activity)
         viewDataBinding.contentFrame!!.addView(mScannerView)
         mBehavior = BottomSheetBehavior.from<View>(viewDataBinding.root.new_volunteer_sheet)
@@ -138,10 +163,13 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
                 }
             }
         )
+
+
     }
 
     private fun setToolBar() {
-        viewDataBinding.toolbar.title = EventDetailsFragArgs.fromBundle(arguments!!).title
+
+        viewDataBinding.toolbar.title = event?.name
         viewDataBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         viewDataBinding.toolbar.setNavigationOnClickListener { activity()!!.onBackPressed() }
     }
@@ -167,7 +195,13 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             activity = activity()!!
         )
 
-        vm.registerVolunteerByCodeOrNumber("1", "1", "1", "")
+        vm.registerVolunteerByCodeOrNumber(
+            vm.pref.session,
+            event?.branchId.toString(),
+            "1",
+            event?.eventId.toString(),
+            ""
+        )
     }
 
     private fun showSuccessDialog() {
@@ -275,12 +309,24 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
         }
         viewDataBinding.btnSendCodeOrID.setOnClickListener {
 
-            vm.registerVolunteerByCodeOrNumber("1", "1", "1", "")
+            vm.registerVolunteerByCodeOrNumber(
+                vm.pref.session,
+                event?.branchId.toString(),
+                "1",
+                event?.eventId.toString(),
+                ""
+            )
 
         }
 
         viewDataBinding.btnSendNumber.setOnClickListener {
-            vm.registerVolunteerByCodeOrNumber("1", "", "1", "010")
+            vm.registerVolunteerByCodeOrNumber(
+                vm.pref.session,
+                event?.branchId.toString(),
+                "",
+                event?.eventId.toString(),
+                viewDataBinding.etNumber.text.toString()
+            )
 //            when {
 //
 //                !isPhoneNumber(
@@ -399,11 +445,15 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             focusView?.requestFocus()
         } else {
 
+
+            val gender =
+                if (viewDataBinding.newVolunteerSheet.spinnerGender.selectedItemPosition == 0) GenderEnum.MALE else GenderEnum.FEMALE
             vm.registerVolunteerByData(
+                vm.pref.session,
                 viewDataBinding.newVolunteerSheet.etEmail.text.toString(),
                 viewDataBinding.newVolunteerSheet.etBranchId.text.toString(),
                 viewDataBinding.newVolunteerSheet.etEventId.text.toString(),
-                viewDataBinding.newVolunteerSheet.spinnerGender.selectedItem.toString(),
+                gender,
                 viewDataBinding.newVolunteerSheet.etName.text.toString(),
                 viewDataBinding.newVolunteerSheet.etPhoneNumber.text.toString(),
                 viewDataBinding.newVolunteerSheet.etRegionId.text.toString()

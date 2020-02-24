@@ -8,27 +8,30 @@ package com.resala.mobile.qrregister.shared.network
 
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
 import com.resala.mobile.qrregister.shared.data.model.NormalResponse
+import com.resala.mobile.qrregister.ui.eventdetailsfragment.GenderEnum
 import io.reactivex.Observable
+import okhttp3.RequestBody
 import retrofit2.http.*
 
-
+@JvmSuppressWildcards
 interface ApiInterface {
 
-    @FormUrlEncoded
-    @POST("")
+    @Multipart
+    @POST("login")
     fun logIn(
-        @Field("id") email: String,
-        @Field("password") password: String
-    ): Observable<NormalResponse>
+        @Part("username") username: RequestBody,
+        @Part("password") password: RequestBody
+    ): Observable<Any>
 
-    @FormUrlEncoded
-    @POST("")
+    @GET("logout")
     fun logOut(
-        @Field("id") email: String
-    ): Observable<NormalResponse>
+        @Header("cookie") sessionId: String
+    ): Observable<String>
 
-    @GET("event/all")
-    fun getEvents(): Observable<List<EventPOJO>>
+    @GET("event")
+    fun getEvents(
+        @Header("cookie") sessionId: String
+    ): Observable<List<EventPOJO>>
 
     @GET("event/{id}")
     fun getEventById(
@@ -38,6 +41,7 @@ interface ApiInterface {
     @FormUrlEncoded
     @POST("registration/volunteer")
     fun registerVolunteerByCode(
+        @Header("cookie") sessionId: String,
         @Field("branchId") branchId: String,
         @Field("code") code: String,
         @Field("eventId") eventId: String,
@@ -46,15 +50,17 @@ interface ApiInterface {
 
 
     @FormUrlEncoded
-    @POST("registration/volunteer")
+    @POST("registration")
     fun registerVolunteerByData(
+        @Header("cookie") sessionId: String,
         @Field("EMail") EMail: String,
         @Field("branchId") branchId: String,
         @Field("eventId") eventId: String,
-        @Field("gender") gender: String,
+        @Field("gender") gender: GenderEnum,
         @Field("name") name: String,
         @Field("phoneNumber") phoneNumber: String,
         @Field("regionId") regionId: String
     ): Observable<NormalResponse>
+
 
 }

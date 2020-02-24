@@ -112,7 +112,7 @@
                             android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
-                              android:id="@+id/edInputName"
+                                android:id="@+id/edInputName"
                                 style="@style/TextInputLayoutStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -165,7 +165,8 @@
                                     android:id="@+id/etEmail"
                                     style="@style/EditTextStyle"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textEmailAddress" />
 
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -187,8 +188,8 @@
                                 android:layout_height="@dimen/_15sdp" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                                style="@style/TextInputLayoutStyle"
                                 android:id="@+id/edInputBranchId"
+                                style="@style/TextInputLayoutStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/branch_id">
@@ -208,8 +209,8 @@
                                 android:layout_height="@dimen/_10sdp" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/edInputRegionId"
                                 style="@style/TextInputLayoutStyle"
-                               android:id="@+id/edInputRegionId"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/region_id">
@@ -219,8 +220,7 @@
                                     android:id="@+id/etRegionId"
                                     style="@style/EditTextStyle"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:imeOptions="actionDone" />
+                                    android:layout_height="wrap_content" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -230,7 +230,7 @@
                                 android:layout_height="@dimen/_10sdp" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                             android:id="@+id/edInputEventId"
+                                android:id="@+id/edInputEventId"
                                 style="@style/TextInputLayoutStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -241,7 +241,8 @@
                                     android:id="@+id/etEventId"
                                     style="@style/EditTextStyle"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionDone" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 

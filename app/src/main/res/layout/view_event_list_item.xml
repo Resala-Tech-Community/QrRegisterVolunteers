@@ -131,7 +131,7 @@
                         style="@style/TextViewStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{event.date}"
+                        android:text="@{event.dateInList}"
                         android:textColor="@color/warm_grey"
                         tools:text="@string/internet_connection_has_been_lost" />
 

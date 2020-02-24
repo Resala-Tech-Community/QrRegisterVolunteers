@@ -51,7 +51,7 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
         _toggleSheet.value = Unit
     }
 
-    fun registerData(){
+    fun registerData() {
         _registerData.value = Unit
     }
 
@@ -112,6 +112,7 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
 
     @SuppressLint("CheckResult")
     fun registerVolunteerByCodeOrNumber(
+        session_id: String,
         branchId: String,
         code: String,
         eventId: String,
@@ -120,6 +121,7 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
         _responseRegisterBody.value = ResponseRegisterBody(isLoading = true)
 
         api.registerVolunteerByCode(
+            session_id,
             branchId,
             code,
             eventId,
@@ -136,15 +138,17 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
                 _responseRegisterBody.value = ResponseRegisterBody(isLoading = false)
             })
     }
+
     /**
      *      register new volunteer by data  (email,gender,name, etc...)
      * */
     @SuppressLint("CheckResult")
     fun registerVolunteerByData(
+        session_id: String,
         EMail: String,
         branchId: String,
         eventId: String,
-        gender: String,
+        gender: GenderEnum,
         name: String,
         phoneNumber: String,
         regionId: String
@@ -152,6 +156,7 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
         _responseRegisterBody.value = ResponseRegisterBody(isLoading = true)
 
         api.registerVolunteerByData(
+            session_id,
             EMail,
             branchId,
             eventId,

@@ -37,6 +37,9 @@
                 app:destination="@id/eventDetailsFrag"
 
                 />
+        <action
+                android:id="@+id/action_eventsFrag_to_loginFrag"
+                app:destination="@id/loginFrag" />
     </fragment>
 
     <fragment
@@ -58,5 +61,7 @@
                 app:destination="@id/eventsFrag"
                 app:popUpTo="@+id/nav_graph"
                 />
+
+
     </fragment>
 </navigation>

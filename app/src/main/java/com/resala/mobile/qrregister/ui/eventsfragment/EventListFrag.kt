@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragEventsBinding
@@ -24,27 +25,33 @@ import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
 import com.resala.mobile.qrregister.shared.util.RecyclerSectionItemDecoration
 import com.resala.mobile.qrregister.shared.util.RecyclerSectionItemDecoration.SectionCallback
 import com.resala.mobile.qrregister.shared.util.ext.showError
+import com.resala.mobile.qrregister.shared.vm.SharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 open class EventListFrag : BaseFrag<EventListVm>() {
 
     override val vm: EventListVm by viewModel()
+
     override var layoutId: Int = R.layout.frag_events
     private var mEventList: ArrayList<EventPOJO>? = null
     private var eventadapter: EventsAdapter<EventPOJO>? = null
     private lateinit var viewDataBinding: FragEventsBinding
-    var flagDecoration = false
+    private var flagDecoration = false
+    private lateinit var model: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         viewDataBinding = FragEventsBinding.inflate(inflater, container, false).apply {
             viewmodel = vm
         }
         setHasOptionsMenu(true)
+        model = activity()?.let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }!!
+
         return viewDataBinding.root
     }
 
@@ -112,7 +119,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                 }
             }
         )
-        vm.getEvents()
+        vm.getEvents(vm.pref.session)
 
     }
 
@@ -137,7 +144,10 @@ open class EventListFrag : BaseFrag<EventListVm>() {
 
                     override fun getSectionHeader(position: Int): CharSequence {
                         return mEventList?.get(position)
-                            ?.date!!.subSequence(0, mEventList[position].date.length)
+                            ?.formattedDate!!.subSequence(
+                            0,
+                            mEventList[position].formattedDate.length
+                        )
 
                     }
                 })
@@ -168,17 +178,9 @@ open class EventListFrag : BaseFrag<EventListVm>() {
 
 
     private fun onEventClicked(event: EventPOJO) {
-
-//        val action =
-//            EventListFragDirections.actionEventsFragToEventDetailsFrag(
-//                event.id.toString(),
-//                event.name
-//            )
-//        if (findNavController().currentDestination?.id == R.id.eventsFrag) {
-//            findNavController().navigate(action)
-//        }
+        model.select(event)
         val action = EventListFragDirections.actionEventsFragToEventDetailsFrag(
-            event.id.toString(),
+            event.eventId.toString(),
             event.name
         )
         if (findNavController().currentDestination?.id == R.id.eventsFrag) {
@@ -206,10 +208,38 @@ open class EventListFrag : BaseFrag<EventListVm>() {
 
         tv_confirm.setOnClickListener {
             alertDialog.dismiss()
-            //doLogout()
+            doLogout()
         }
 
         tv_cancle.setOnClickListener { alertDialog.dismiss() }
+
+    }
+
+    private fun doLogout() {
+
+        vm.logoutResponse.observe(this, Observer {
+            when {
+                it.result != "" -> {
+                    activity()?.hideProgressBar()
+                    vm.pref.session = ""
+                    val action = EventListFragDirections.actionEventsFragToLoginFrag()
+                    findNavController().navigate(action)
+                }
+                it.error != null -> {
+                    it.error.showError(context()!!)
+                    activity()?.hideProgressBar()
+                }
+
+
+                it.isLoading -> {
+                    activity()?.showProgressBar()
+                }
+            }
+
+        })
+        vm.logout(
+            vm.pref.session
+        )
 
     }
 

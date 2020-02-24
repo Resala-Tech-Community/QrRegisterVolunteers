@@ -35,8 +35,8 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "API_BASE_URL", "\"http://192.168.1.7:8081/\"")
-            buildConfigField("String", "API_BASE_URL_TWO", "\"http://192.168.1.7:8080/\"")
+            buildConfigField("String", "API_BASE_URL", "\"http://192.168.1.7:8080/\"")
+
 
         }
         release {
@@ -154,7 +154,7 @@ dependencies {
     implementation deps.arch.uiKtx
     implementation deps.google.androidXLegacySupport
     implementation deps.firebase.database
-    implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation deps.ticker
 
 }
 
