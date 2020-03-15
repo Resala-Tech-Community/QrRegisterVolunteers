@@ -51,5 +51,8 @@
     <string name="not_valid_mobile">Not a valid mobile number</string>
     <string name="invalid_email_format">Invalid Email Address</string>
     <string name="idcode">كود / ID</string>
+    <string name="httpexception">Http Exception</string>
+    <string name="registration_successful">Registration Successful</string>
+    <string name="volunteer_code">Volunteer Code</string>
 
 </resources>

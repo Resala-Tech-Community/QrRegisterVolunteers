@@ -7,26 +7,23 @@ package com.resala.mobile.qrregister.shared.network
 
 
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
-import com.resala.mobile.qrregister.shared.data.model.NormalResponse
-import com.resala.mobile.qrregister.ui.eventdetailsfragment.GenderEnum
+import com.resala.mobile.qrregister.shared.data.model.RegisterResponse
 import io.reactivex.Observable
-import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.http.*
 
 @JvmSuppressWildcards
 interface ApiInterface {
 
-    @Multipart
-    @POST("login")
-    fun logIn(
-        @Part("username") username: RequestBody,
-        @Part("password") password: RequestBody
-    ): Observable<Any>
+
+    @GET("success")
+    fun logIn(@Header("Authorization") auth: String): Observable<Response<ResponseBody>>
 
     @GET("logout")
     fun logOut(
         @Header("cookie") sessionId: String
-    ): Observable<String>
+    ): Observable<Response<ResponseBody>>
 
     @GET("event")
     fun getEvents(
@@ -46,7 +43,7 @@ interface ApiInterface {
         @Field("code") code: String,
         @Field("eventId") eventId: String,
         @Field("phone") phone: String
-    ): Observable<NormalResponse>
+    ): Observable<RegisterResponse>
 
 
     @FormUrlEncoded
@@ -56,11 +53,11 @@ interface ApiInterface {
         @Field("EMail") EMail: String,
         @Field("branchId") branchId: String,
         @Field("eventId") eventId: String,
-        @Field("gender") gender: GenderEnum,
+        @Field("gender") gender: String,
         @Field("name") name: String,
         @Field("phoneNumber") phoneNumber: String,
         @Field("regionId") regionId: String
-    ): Observable<NormalResponse>
+    ): Observable<RegisterResponse>
 
 
 }

@@ -13,8 +13,10 @@ import com.resala.mobile.qrregister.shared.data.DataManager
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
 import com.resala.mobile.qrregister.shared.util.ext.with
 import com.resala.mobile.qrregister.shared.vm.BaseViewModel
+import okhttp3.ResponseBody
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import retrofit2.Response
 
 val eventModule = module {
     viewModel { EventListVm(get()) }
@@ -67,7 +69,7 @@ class EventListVm(dataManager: DataManager) : BaseViewModel(dataManager) {
     val logoutResponse: LiveData<Result> = _logoutResponse
 
     data class Result(
-        val result: String? = "",
+        val result: Response<okhttp3.ResponseBody>? = null,
         val isLoading: Boolean = false,
         val error: Throwable? = null
     )

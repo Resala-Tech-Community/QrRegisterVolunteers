@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import com.resala.mobile.qrregister.shared.data.DataManager
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
 import com.resala.mobile.qrregister.shared.data.model.NormalResponse
+import com.resala.mobile.qrregister.shared.data.model.RegisterResponse
 import com.resala.mobile.qrregister.shared.util.ext.with
 import com.resala.mobile.qrregister.shared.vm.BaseViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -148,7 +149,7 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
         EMail: String,
         branchId: String,
         eventId: String,
-        gender: GenderEnum,
+        gender: String,
         name: String,
         phoneNumber: String,
         regionId: String
@@ -179,7 +180,7 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
 
 
     data class ResponseRegisterBody(
-        val result: NormalResponse? = null,
+        val result: RegisterResponse? = null,
         val isLoading: Boolean = false,
         val errorMessage: Throwable? = null,
         val isOffline: Boolean = false

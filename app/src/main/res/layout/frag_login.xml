@@ -83,6 +83,7 @@
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/ic_lock_black_24dp"
                             android:drawablePadding="@dimen/_8sdp"
+                            android:imeOptions="actionDone"
                             android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>

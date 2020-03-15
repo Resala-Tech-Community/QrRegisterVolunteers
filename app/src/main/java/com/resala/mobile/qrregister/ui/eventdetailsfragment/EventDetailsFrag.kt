@@ -29,6 +29,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragEventDetailsBinding
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
+import com.resala.mobile.qrregister.shared.data.model.RegisterResponse
 import com.resala.mobile.qrregister.shared.dialogs.DialogScanSuccessFragment
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
 import com.resala.mobile.qrregister.shared.util.FlashbarUtil
@@ -41,10 +42,6 @@ import kotlinx.android.synthetic.main.sheet_new_vlounteer.view.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import org.koin.android.viewmodel.ext.android.viewModel
 
-enum class GenderEnum {
-    MALE,
-    FEMALE
-}
 
 class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHandler {
 
@@ -135,7 +132,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
     private fun initView() {
 
         mScannerView = ZXingScannerView(activity)
-        viewDataBinding.contentFrame!!.addView(mScannerView)
+        viewDataBinding.contentFrame.addView(mScannerView)
         mBehavior = BottomSheetBehavior.from<View>(viewDataBinding.root.new_volunteer_sheet)
         showBottomSheetDialog()
 
@@ -149,7 +146,8 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
                     it.result != null -> {
 
                         vm.toggleRevealView(false)
-                        showSuccessDialog()
+                        vm.showHideDots(false)
+                        showSuccessDialog(it.result)
 
                     }
                     it.errorMessage != null -> {
@@ -190,26 +188,23 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun registerVolunteerApi(rawResult: Result) {
-        FlashbarUtil.show(
-            "Contents = " + rawResult.text + ", Format = " + rawResult.barcodeFormat.toString(),
-            activity = activity()!!
-        )
 
         vm.registerVolunteerByCodeOrNumber(
             vm.pref.session,
             event?.branchId.toString(),
-            "1",
+            rawResult.text,
             event?.eventId.toString(),
             ""
         )
     }
 
-    private fun showSuccessDialog() {
+    private fun showSuccessDialog(result: RegisterResponse) {
         val fragmentManager = childFragmentManager
         val newFragment = DialogScanSuccessFragment()
         val args = Bundle()
-        args.putString("NAME", "Muhammad Sayed")
-        args.putString("EVENT", "Qwaphil Ghargi")
+        args.putString("NAME", result.name)
+        args.putString("EVENT", result.phoneNumber)
+        args.putString("QRCODE", result.code)
         newFragment.arguments = args
         val transaction = fragmentManager.beginTransaction()
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -312,7 +307,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             vm.registerVolunteerByCodeOrNumber(
                 vm.pref.session,
                 event?.branchId.toString(),
-                "1",
+                viewDataBinding.etId.text.toString(),
                 event?.eventId.toString(),
                 ""
             )
@@ -327,19 +322,6 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
                 event?.eventId.toString(),
                 viewDataBinding.etNumber.text.toString()
             )
-//            when {
-//
-//                !isPhoneNumber(
-//                    viewDataBinding.btnSendNumber.text.toString()
-//                ) -> {
-//
-//                    viewDataBinding.btnSendNumber.error = getString(R.string.not_valid_mobile)
-//
-//                }
-//                else -> {
-//                    viewDataBinding.btnSendNumber.error = null
-//                    vm.registerVolunteerByCodeOrNumber("1", "", "1", "010")
-//                }}
         }
 
 
@@ -447,7 +429,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
 
 
             val gender =
-                if (viewDataBinding.newVolunteerSheet.spinnerGender.selectedItemPosition == 0) GenderEnum.MALE else GenderEnum.FEMALE
+                if (viewDataBinding.newVolunteerSheet.spinnerGender.selectedItemPosition == 0) "male" else "female"
             vm.registerVolunteerByData(
                 vm.pref.session,
                 viewDataBinding.newVolunteerSheet.etEmail.text.toString(),

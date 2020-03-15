@@ -22,12 +22,14 @@ class DialogScanSuccessFragment : DialogFragment() {
     private var root_view: View? = null
     private var NAME = ""
     private var EVENT = ""
+    private var QRCODE = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             NAME = arguments?.getString("NAME")!!
             EVENT = arguments?.getString("EVENT")!!
+            QRCODE = arguments?.getString("QRCODE")!!
         }
 
     }

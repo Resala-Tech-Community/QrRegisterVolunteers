@@ -35,14 +35,13 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "API_BASE_URL", "\"http://192.168.1.7:8080/\"")
-
+            buildConfigField("String", "API_BASE_URL", "\"http://34.68.235.103:8080/\"")
 
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "API_BASE_URL", "\"https://api.myjson.com/bins/\"")
+            buildConfigField("String", "API_BASE_URL", "\"http://34.68.235.103:8080/\"")
         }
 
     }

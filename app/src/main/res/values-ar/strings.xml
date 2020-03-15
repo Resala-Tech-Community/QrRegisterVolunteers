@@ -53,5 +53,8 @@
     <string name="not_valid_mobile">رقم الهاتف غير صحيح</string>
     <string name="invalid_email_format">البريد الايكتروني غير صحيح</string>
     <string name="idcode">كود / ID</string>
+    <string name="httpexception">Http Exception</string>
+    <string name="registration_successful">تم التسجيل بنجاح</string>
+    <string name="volunteer_code">كود المتطوع</string>
 
 </resources>

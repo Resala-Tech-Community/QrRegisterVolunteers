@@ -7,19 +7,22 @@ package com.resala.mobile.qrregister.shared.network
 
 
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
-import com.resala.mobile.qrregister.shared.data.model.NormalResponse
-import com.resala.mobile.qrregister.ui.eventdetailsfragment.GenderEnum
+import com.resala.mobile.qrregister.shared.data.model.RegisterResponse
 import io.reactivex.Observable
+import okhttp3.Credentials
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 
 class ApiRepository(private val api: ApiInterface) {
 
-    fun login(username: RequestBody, password: RequestBody): Observable<Any> {
-        return api.logIn(username, password)
+    fun login(username: String, password: String): Observable<Response<ResponseBody>> {
+        val auth = Credentials.basic(username, password)
+        return api.logIn(auth)
     }
 
-    fun logout(session_id: String): Observable<String> {
+    fun logout(session_id: String): Observable<Response<ResponseBody>> {
         return api.logOut(session_id)
     }
 
@@ -37,7 +40,7 @@ class ApiRepository(private val api: ApiInterface) {
         code: String,
         eventId: String,
         phone: String
-    ): Observable<NormalResponse> {
+    ): Observable<RegisterResponse> {
         return api.registerVolunteerByCode(
             session_id,
             branchId,
@@ -52,11 +55,11 @@ class ApiRepository(private val api: ApiInterface) {
         EMail: String,
         branchId: String,
         eventId: String,
-        gender: GenderEnum,
+        gender: String,
         name: String,
         phoneNumber: String,
         regionId: String
-    ): Observable<NormalResponse> {
+    ): Observable<RegisterResponse> {
         return api.registerVolunteerByData(
             session_id,
             EMail,

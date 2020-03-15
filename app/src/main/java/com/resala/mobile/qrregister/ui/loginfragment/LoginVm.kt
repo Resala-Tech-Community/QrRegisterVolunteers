@@ -13,8 +13,10 @@ import com.resala.mobile.qrregister.shared.data.DataManager
 import com.resala.mobile.qrregister.shared.util.ext.with
 import com.resala.mobile.qrregister.shared.vm.BaseViewModel
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import retrofit2.Response
 
 
 val loginModule = module {
@@ -36,8 +38,9 @@ class LoginVm(dataManager: DataManager) : BaseViewModel(dataManager) {
     }
 
     @SuppressLint("CheckResult")
-    fun login(username: RequestBody, password: RequestBody) {
+    fun login(username: String, password: String) {
         _loginResponse.value = Result(isLoading = true)
+
         api.login(
             username, password
         )
@@ -51,7 +54,7 @@ class LoginVm(dataManager: DataManager) : BaseViewModel(dataManager) {
     }
 
     data class Result(
-        val result: Any? = "",
+        val result: Response<ResponseBody>? = null,
         val isLoading: Boolean = false,
         val error: Throwable? = null
     )

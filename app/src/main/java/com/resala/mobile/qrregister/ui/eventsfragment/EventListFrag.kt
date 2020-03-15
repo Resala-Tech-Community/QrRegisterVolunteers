@@ -219,9 +219,10 @@ open class EventListFrag : BaseFrag<EventListVm>() {
 
         vm.logoutResponse.observe(this, Observer {
             when {
-                it.result != "" -> {
+                it.result != null -> {
                     activity()?.hideProgressBar()
                     vm.pref.session = ""
+
                     val action = EventListFragDirections.actionEventsFragToLoginFrag()
                     findNavController().navigate(action)
                 }
@@ -229,7 +230,6 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                     it.error.showError(context()!!)
                     activity()?.hideProgressBar()
                 }
-
 
                 it.isLoading -> {
                     activity()?.showProgressBar()

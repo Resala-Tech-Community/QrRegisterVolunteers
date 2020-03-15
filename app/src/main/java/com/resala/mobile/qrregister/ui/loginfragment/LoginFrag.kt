@@ -22,7 +22,9 @@ import com.resala.mobile.qrregister.shared.util.BuildUtil
 import com.resala.mobile.qrregister.shared.util.ext.showError
 import com.resala.mobile.qrregister.shared.util.isNullOrEmpty
 import kotlinx.android.synthetic.main.frag_login.*
-import okhttp3.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -114,9 +116,11 @@ class LoginFrag : BaseFrag<LoginVm>() {
 
         vm.loginResponse.observe(this, Observer {
             when {
-                it.result != "" -> {
+                it.result != null -> {
                     activity()?.hideProgressBar()
-                    vm.pref.session = it.result!! as String
+                    Log.e("session", it.result.headers().get("Set-Cookie")!!)
+
+                    vm.pref.session = it.result.headers().get("Set-Cookie")!!
                     val action = LoginFragDirections
                         .actionLoginFragToEventsFrag()
                     findNavController().navigate(action)
@@ -124,13 +128,8 @@ class LoginFrag : BaseFrag<LoginVm>() {
                 it.error != null -> {
                     it.error.showError(context()!!)
                     activity()?.hideProgressBar()
-                    vm.pref.session = "JSESSIONID=9E3A2E2775FED7C168D880CB600FFE1C"
-                    val action = LoginFragDirections
-                        .actionLoginFragToEventsFrag()
-                    findNavController().navigate(action)
+
                 }
-
-
                 it.isLoading -> {
                     activity()?.showProgressBar()
                 }
@@ -138,19 +137,9 @@ class LoginFrag : BaseFrag<LoginVm>() {
 
         })
 
-        val user = RequestBody.create(
-            MediaType.parse("text"),
-            viewDataBinding.idEditText.text.toString()
-        )
-        val pass = MultipartBody.create(
-            MediaType.parse("text"),
-            viewDataBinding.passwordEditText.text.toString()
-        )
-
         vm.login(
-            user, pass
+            viewDataBinding.idEditText.text.toString(), viewDataBinding.passwordEditText.text.toString()
         )
-
 
 
     }

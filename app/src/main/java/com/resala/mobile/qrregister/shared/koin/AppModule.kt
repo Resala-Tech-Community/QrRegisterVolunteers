@@ -6,6 +6,7 @@
 package com.resala.mobile.qrregister.shared.koin
 
 
+import android.util.Log
 import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.google.gson.GsonBuilder
@@ -17,6 +18,7 @@ import com.resala.mobile.qrregister.shared.network.ApiInterface
 import com.resala.mobile.qrregister.shared.network.ApiRepository
 import com.resala.mobile.qrregister.shared.rx.SchedulerProvider
 import com.resala.mobile.qrregister.shared.rx.SchedulerProviderImpl
+import com.resala.mobile.qrregister.shared.util.BasicAuthInterceptor
 import com.resala.mobile.qrregister.shared.util.SharedPref
 import com.resala.mobile.qrregister.shared.util.StringConverterFactory
 import com.resala.mobile.qrregister.shared.util.io.ReceivedCookiesInterceptor
@@ -45,6 +47,7 @@ val appModule = module {
             .client(get())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addConverterFactory(StringConverterFactory.create())
+
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .build()
             .create(ApiInterface::class.java)
@@ -59,9 +62,19 @@ val appModule = module {
 
         val builder = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            //.addInterceptor(BasicAuthInterceptor("admin", "admin"))
+//            .addInterceptor(
+//                BasicAuthInterceptor(
+//                    SharedPref(get()).username,
+//                    SharedPref(get()).password
+//                )
+//            )
             .addInterceptor(ReceivedCookiesInterceptor())
-            //.addNetworkInterceptor(BasicAuthInterceptor("admin", "admin"))
+//            .addNetworkInterceptor(
+//                BasicAuthInterceptor(
+//                    SharedPref(get()).username,
+//                    SharedPref(get()).password
+//                )
+//            )
 
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
