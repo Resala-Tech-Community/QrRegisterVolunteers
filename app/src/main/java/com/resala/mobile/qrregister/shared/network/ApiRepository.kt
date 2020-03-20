@@ -37,9 +37,9 @@ class ApiRepository(private val api: ApiInterface) {
     fun registerVolunteerByCode(
         session_id: String,
         branchId: String,
-        code: String,
+        code: String?,
         eventId: String,
-        phone: String
+        phone: String?
     ): Observable<RegisterResponse> {
         return api.registerVolunteerByCode(
             session_id,

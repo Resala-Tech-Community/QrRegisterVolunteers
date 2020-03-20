@@ -151,6 +151,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
 
                     }
                     it.errorMessage != null -> {
+
                         vm.showHideDots(false)
                         it.errorMessage.showError(context()!!)
                     }
@@ -194,7 +195,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             event?.branchId.toString(),
             rawResult.text,
             event?.eventId.toString(),
-            ""
+            null
         )
     }
 
@@ -205,6 +206,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
         args.putString("NAME", result.name)
         args.putString("EVENT", result.phoneNumber)
         args.putString("QRCODE", result.code)
+
         newFragment.arguments = args
         val transaction = fragmentManager.beginTransaction()
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -309,7 +311,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
                 event?.branchId.toString(),
                 viewDataBinding.etId.text.toString(),
                 event?.eventId.toString(),
-                ""
+                null
             )
 
         }
@@ -318,7 +320,7 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             vm.registerVolunteerByCodeOrNumber(
                 vm.pref.session,
                 event?.branchId.toString(),
-                "",
+                null,
                 event?.eventId.toString(),
                 viewDataBinding.etNumber.text.toString()
             )

@@ -6,9 +6,9 @@
 package com.resala.mobile.qrregister.ui.loginfragment
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,12 +19,9 @@ import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragLoginBinding
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
 import com.resala.mobile.qrregister.shared.util.BuildUtil
-import com.resala.mobile.qrregister.shared.util.ext.showError
+import com.resala.mobile.qrregister.shared.util.FlashbarUtil
 import com.resala.mobile.qrregister.shared.util.isNullOrEmpty
 import kotlinx.android.synthetic.main.frag_login.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -118,17 +115,25 @@ class LoginFrag : BaseFrag<LoginVm>() {
             when {
                 it.result != null -> {
                     activity()?.hideProgressBar()
-                    Log.e("session", it.result.headers().get("Set-Cookie")!!)
+                    when (it.result.code()) {
+                        in 200..300 -> {
 
-                    vm.pref.session = it.result.headers().get("Set-Cookie")!!
-                    val action = LoginFragDirections
-                        .actionLoginFragToEventsFrag()
-                    findNavController().navigate(action)
+                            vm.pref.session = it.result.headers().get("Set-Cookie")!!
+                            val action = LoginFragDirections
+                                .actionLoginFragToEventsFrag()
+                            findNavController().navigate(action)
+                        }
+                        else -> {
+
+                            FlashbarUtil.show(
+                                getString(R.string.invalid_credintials),
+                                activity = context as Activity
+                            )
+                        }
+                    }
+
                 }
                 it.error != null -> {
-                    it.error.showError(context()!!)
-                    activity()?.hideProgressBar()
-
                 }
                 it.isLoading -> {
                     activity()?.showProgressBar()
@@ -138,7 +143,8 @@ class LoginFrag : BaseFrag<LoginVm>() {
         })
 
         vm.login(
-            viewDataBinding.idEditText.text.toString(), viewDataBinding.passwordEditText.text.toString()
+            viewDataBinding.idEditText.text.toString(),
+            viewDataBinding.passwordEditText.text.toString()
         )
 
 

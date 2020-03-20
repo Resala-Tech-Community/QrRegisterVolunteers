@@ -56,5 +56,6 @@
     <string name="httpexception">Http Exception</string>
     <string name="registration_successful">تم التسجيل بنجاح</string>
     <string name="volunteer_code">كود المتطوع</string>
+    <string name="invalid_credintials">بيانات التسجيل غير صحيحة</string>
 
 </resources>

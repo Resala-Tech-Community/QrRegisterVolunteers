@@ -32,13 +32,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal"
+
                     android:orientation="vertical">
+
+                <Space
+                        android:layout_width="0dp"
+                        android:layout_height="10dp" />
 
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/circle_bullet"
-                        android:tint="@color/start_event" />
+                        android:src="@drawable/circle_bullet_start" />
 
                 <View
                         android:layout_width="2dp"
@@ -49,14 +53,17 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/circle_bullet"
+                        android:rotation="45"
+                        android:src="@drawable/circle_bullet_end" />
 
-                        android:tint="@color/resala_red" />
+                <Space
+                        android:layout_width="0dp"
+                        android:layout_height="10dp" />
 
             </LinearLayout>
 
             <Space
-                    android:layout_width="@dimen/_5sdp"
+                    android:layout_width="@dimen/_10sdp"
                     android:layout_height="0dp" />
 
             <LinearLayout

@@ -115,9 +115,9 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
     fun registerVolunteerByCodeOrNumber(
         session_id: String,
         branchId: String,
-        code: String,
+        code: String?,
         eventId: String,
-        phone: String
+        phone: String?
     ) {
         _responseRegisterBody.value = ResponseRegisterBody(isLoading = true)
 

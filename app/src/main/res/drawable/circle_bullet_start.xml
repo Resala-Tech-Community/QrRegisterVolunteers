@@ -9,6 +9,8 @@
     <size
             android:width="@dimen/_8sdp"
             android:height="@dimen/_8sdp" />
-    <solid android:color="@color/resala_blue" />
-
+    <solid android:color="@color/start_event" />
+    <stroke
+            android:width="2dp"
+            android:color="@color/btn_semi_grey" />
 </shape>

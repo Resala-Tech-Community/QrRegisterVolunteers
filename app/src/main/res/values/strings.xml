@@ -54,5 +54,6 @@
     <string name="httpexception">Http Exception</string>
     <string name="registration_successful">Registration Successful</string>
     <string name="volunteer_code">Volunteer Code</string>
+    <string name="invalid_credintials">Invalid Credintials</string>
 
 </resources>

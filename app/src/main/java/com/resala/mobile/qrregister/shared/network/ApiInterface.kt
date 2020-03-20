@@ -40,9 +40,9 @@ interface ApiInterface {
     fun registerVolunteerByCode(
         @Header("cookie") sessionId: String,
         @Field("branchId") branchId: String,
-        @Field("code") code: String,
+        @Field("code") code: String?,
         @Field("eventId") eventId: String,
-        @Field("phone") phone: String
+        @Field("phone") phone: String?
     ): Observable<RegisterResponse>
 
 
