@@ -15,7 +15,7 @@ object FlashbarUtil {
 
     fun show(
         message: String,
-        @ColorRes color: Int = R.color.colorAccent,
+        @ColorRes color: Int = R.color.colorPrimary,
         activity: Activity
     ) {
         try {

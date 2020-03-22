@@ -10,7 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.resala.mobile.qrregister.shared.data.DataManager
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
-import com.resala.mobile.qrregister.shared.data.model.NormalResponse
+import com.resala.mobile.qrregister.shared.data.model.Region
 import com.resala.mobile.qrregister.shared.data.model.RegisterResponse
 import com.resala.mobile.qrregister.shared.util.ext.with
 import com.resala.mobile.qrregister.shared.vm.BaseViewModel
@@ -181,6 +181,44 @@ class EventDetailsVm(dataManager: DataManager) : BaseViewModel(dataManager) {
 
     data class ResponseRegisterBody(
         val result: RegisterResponse? = null,
+        val isLoading: Boolean = false,
+        val errorMessage: Throwable? = null,
+        val isOffline: Boolean = false
+    )
+
+
+    /**
+     *      get regions of resala branches
+     * */
+    private val _responseRegionsBody = MutableLiveData<ResponseRegionBody>()
+    val responseRegionsBody: LiveData<ResponseRegionBody> = _responseRegionsBody
+
+
+    @SuppressLint("CheckResult")
+    fun getRegions(
+        session_id: String
+    ) {
+        _responseRegionsBody.value = ResponseRegionBody(isLoading = true)
+
+        api.getRegions(
+            session_id
+
+        )
+            .with(scheduler)
+            .subscribe({ result ->
+                _dataLoading.value = false
+                _responseRegionsBody.value = ResponseRegionBody(result = result)
+            }, { throwable ->
+                _dataLoading.value = false
+                _responseRegionsBody.value = ResponseRegionBody(errorMessage = throwable)
+            }, {
+                _responseRegionsBody.value = ResponseRegionBody(isLoading = false)
+            })
+    }
+
+
+    data class ResponseRegionBody(
+        val result: ArrayList<Region>? = null,
         val isLoading: Boolean = false,
         val errorMessage: Throwable? = null,
         val isOffline: Boolean = false

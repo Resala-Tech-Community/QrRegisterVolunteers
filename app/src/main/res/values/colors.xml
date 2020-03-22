@@ -18,4 +18,8 @@
     <color name="overlay_light_30">#4DFFFFFF</color>
     <color name="color_opacity_black">#9c000000</color>
     <color name="start_event">#C0D619</color>
+    <!--barcode colors-->
+
+    <color name="viewfinder_laser">@color/colorAccent</color>
+    <color name="viewfinder_border">@color/colorPrimary</color>
 </resources>

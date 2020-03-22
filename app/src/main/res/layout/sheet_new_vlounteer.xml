@@ -166,6 +166,7 @@
                                     style="@style/EditTextStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:imeOptions="actionDone"
                                     android:inputType="textEmailAddress" />
 
 
@@ -192,7 +193,8 @@
                                 style="@style/TextInputLayoutStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/branch_id">
+                                android:hint="@string/branch_id"
+                                android:visibility="gone">
 
 
                             <EditText
@@ -204,16 +206,13 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
 
-                        <Space
-                                android:layout_width="0dp"
-                                android:layout_height="@dimen/_10sdp" />
-
                         <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/edInputRegionId"
                                 style="@style/TextInputLayoutStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/region_id">
+                                android:hint="@string/region_id"
+                                android:visibility="gone">
 
 
                             <EditText
@@ -224,17 +223,20 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
+                        <Spinner
+                                android:id="@+id/spinnerRegions"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:spinnerMode="dropdown" />
 
-                        <Space
-                                android:layout_width="0dp"
-                                android:layout_height="@dimen/_10sdp" />
 
                         <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/edInputEventId"
                                 style="@style/TextInputLayoutStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/event_id">
+                                android:hint="@string/event_id"
+                                android:visibility="gone">
 
 
                             <EditText
@@ -242,6 +244,7 @@
                                     style="@style/EditTextStyle"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:imeOptions="actionDone" />
 
                         </com.google.android.material.textfield.TextInputLayout>

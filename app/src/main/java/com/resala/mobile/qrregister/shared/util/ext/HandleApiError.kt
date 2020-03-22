@@ -15,10 +15,10 @@ import java.net.ConnectException
 import java.util.concurrent.TimeoutException
 
 
-fun Throwable.showError(context: Context, isLogin: Boolean = false): Boolean {
+fun Throwable.showError(context: Context): Boolean {
     when (this) {
         is HttpException -> {
-            checkError(this, context, isLogin)
+            checkError(this, context)
         }
         is TimeoutException -> FlashbarUtil.show(
             context.getString(R.string.timeout),
@@ -32,13 +32,11 @@ fun Throwable.showError(context: Context, isLogin: Boolean = false): Boolean {
     return false
 }
 
-private fun checkError(errorException: HttpException?, context: Context, isLogin: Boolean) {
+private fun checkError(errorException: HttpException?, context: Context) {
     val errorBody = errorException?.response()?.errorBody()?.string()
     val mainObject = JSONObject(errorBody)
     FlashbarUtil.show(
-        if (isLogin) mainObject.getString("message") else mainObject.getJSONObject("body").getString(
-            "message"
-        ),
+        mainObject.getString("message"),
         activity = context as Activity
     )
 

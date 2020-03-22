@@ -7,6 +7,7 @@ package com.resala.mobile.qrregister.shared.network
 
 
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
+import com.resala.mobile.qrregister.shared.data.model.Region
 import com.resala.mobile.qrregister.shared.data.model.RegisterResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -59,5 +60,9 @@ interface ApiInterface {
         @Field("regionId") regionId: String
     ): Observable<RegisterResponse>
 
+    @GET("region/all")
+    fun getRegions(
+        @Header("cookie") sessionId: String
+    ): Observable<ArrayList<Region>>
 
 }

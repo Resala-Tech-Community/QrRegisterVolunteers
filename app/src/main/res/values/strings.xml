@@ -55,5 +55,6 @@
     <string name="registration_successful">Registration Successful</string>
     <string name="volunteer_code">Volunteer Code</string>
     <string name="invalid_credintials">Invalid Credintials</string>
+    <string name="choose_a_region_from_the_list">Choose Region</string>
 
 </resources>

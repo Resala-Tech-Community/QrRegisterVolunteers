@@ -57,5 +57,6 @@
     <string name="registration_successful">تم التسجيل بنجاح</string>
     <string name="volunteer_code">كود المتطوع</string>
     <string name="invalid_credintials">بيانات التسجيل غير صحيحة</string>
+    <string name="choose_a_region_from_the_list">أختر المنطقة</string>
 
 </resources>

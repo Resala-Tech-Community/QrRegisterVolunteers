@@ -16,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.checkSelfPermission
@@ -29,6 +30,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragEventDetailsBinding
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
+import com.resala.mobile.qrregister.shared.data.model.Region
 import com.resala.mobile.qrregister.shared.data.model.RegisterResponse
 import com.resala.mobile.qrregister.shared.dialogs.DialogScanSuccessFragment
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
@@ -54,7 +56,8 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
     private var mFirebaseDatabase: DatabaseReference? = null
     private var mFirebaseInstance: FirebaseDatabase? = null
     private var event: EventPOJO? = null
-
+    var regionId = 0
+    var isRegionSelected = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -236,7 +239,6 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                 startCamera()
             } else {
                 stopCamera()
@@ -275,12 +277,14 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
                 when (newState) {
                     BottomSheetBehavior.STATE_HIDDEN -> {
                         vm.showHideText(true)
+
                     }
                     BottomSheetBehavior.STATE_EXPANDED -> {
                         vm.showHideText(false)
                     }
                     BottomSheetBehavior.STATE_COLLAPSED -> {
                         vm.showHideText(true)
+
                     }
                     BottomSheetBehavior.STATE_DRAGGING -> {
                     }
@@ -295,6 +299,30 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
 
     @SuppressLint("CheckResult")
     private fun setupRegisterField() {
+        //spinner region
+        vm.getRegions(vm.pref.session)
+        vm.responseRegionsBody.observe(
+            this,
+            Observer {
+                when {
+                    it.isLoading -> {
+                        vm.showHideDots(true)
+                    }
+                    it.result != null -> {
+                        vm.showHideDots(false)
+                        setRegionsAdapter(it.result)
+                    }
+                    it.errorMessage != null -> {
+                        vm.showHideDots(false)
+                        it.errorMessage.showError(context()!!)
+                    }
+                    it.isOffline -> {
+
+                    }
+
+                }
+            }
+        )
         RxTextView.textChanges(viewDataBinding.etId).subscribe { text ->
             registerCodeBtnVisibilty(text)
         }
@@ -337,6 +365,38 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
 
     }
 
+    private fun setRegionsAdapter(result: ArrayList<Region>) {
+        val regionPromptMessage = Region()
+        regionPromptMessage.name = getString(R.string.choose_a_region_from_the_list)
+        result.add(regionPromptMessage)
+
+        val adapter = RegionAdapter(activity()!!, result)
+        viewDataBinding.newVolunteerSheet.spinnerRegions.adapter = adapter
+        viewDataBinding.newVolunteerSheet.spinnerRegions.setSelection(adapter.count)
+        viewDataBinding.newVolunteerSheet.spinnerRegions.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    val region = parent!!.getItemAtPosition(0) as Region
+                    regionId = region.id
+                    isRegionSelected = false
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    isRegionSelected = true
+                    val region = parent!!.getItemAtPosition(position) as Region
+                    regionId = region.id
+
+                }
+
+            }
+
+    }
+
     fun checkDataValidations() {
         var focusView: View? = null
         var cancel = false
@@ -361,23 +421,6 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             viewDataBinding.newVolunteerSheet.etInputEmail.error = null
         }
 
-        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etBranchId.text.toString())) {
-            viewDataBinding.newVolunteerSheet.edInputBranchId.error =
-                getString(R.string.required_field)
-            focusView = viewDataBinding.newVolunteerSheet.etBranchId
-            cancel = true
-        } else {
-            viewDataBinding.newVolunteerSheet.edInputBranchId.error = null
-        }
-
-        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etEventId.text.toString())) {
-            viewDataBinding.newVolunteerSheet.edInputBranchId.error =
-                getString(R.string.required_field)
-            focusView = viewDataBinding.newVolunteerSheet.etEventId
-            cancel = true
-        } else {
-            viewDataBinding.newVolunteerSheet.edInputBranchId.error = null
-        }
 
 
         if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etName.text.toString())) {
@@ -407,26 +450,14 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             viewDataBinding.newVolunteerSheet.edInputPhoneId.error = null
         }
 
-        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etRegionId.text.toString())) {
-            viewDataBinding.newVolunteerSheet.edInputRegionId.error =
-                getString(R.string.required_field)
-            focusView = viewDataBinding.newVolunteerSheet.etRegionId
-            cancel = true
-        } else {
-            viewDataBinding.newVolunteerSheet.edInputRegionId.error = null
-        }
 
-
-        if (isNullOrEmpty(viewDataBinding.newVolunteerSheet.etEventId.text.toString())) {
-            viewDataBinding.newVolunteerSheet.edInputEventId.error =
-                getString(R.string.required_field)
-            focusView = viewDataBinding.newVolunteerSheet.etEventId
-            cancel = true
-        } else {
-            viewDataBinding.newVolunteerSheet.edInputEventId.error = null
-        }
         if (cancel) {
             focusView?.requestFocus()
+        } else if (!isRegionSelected) {
+            FlashbarUtil.show(
+                getString(R.string.choose_a_region_from_the_list),
+                activity = activity()!!
+            )
         } else {
 
 
@@ -435,12 +466,12 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
             vm.registerVolunteerByData(
                 vm.pref.session,
                 viewDataBinding.newVolunteerSheet.etEmail.text.toString(),
-                viewDataBinding.newVolunteerSheet.etBranchId.text.toString(),
-                viewDataBinding.newVolunteerSheet.etEventId.text.toString(),
+                event?.branchId.toString(),
+                event?.eventId.toString(),
                 gender,
                 viewDataBinding.newVolunteerSheet.etName.text.toString(),
                 viewDataBinding.newVolunteerSheet.etPhoneNumber.text.toString(),
-                viewDataBinding.newVolunteerSheet.etRegionId.text.toString()
+                regionId.toString()
 
             )
         }
