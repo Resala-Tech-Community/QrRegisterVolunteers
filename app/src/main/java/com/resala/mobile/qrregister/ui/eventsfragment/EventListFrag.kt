@@ -102,7 +102,6 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                         showMainLayout()
                         mEventList?.clear()
                         mEventList?.addAll(it.eventList)
-
                         setUpStickyHeaders(mEventList)
                         eventadapter!!.notifyDataSetChanged()
                         hideLoading()

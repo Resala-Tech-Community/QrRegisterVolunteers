@@ -7,8 +7,8 @@
         android:shape="oval" >
 
     <size
-            android:width="@dimen/_8sdp"
-            android:height="@dimen/_8sdp" />
+            android:width="@dimen/_7sdp"
+            android:height="@dimen/_7sdp" />
     <solid android:color="@color/resala_red" />
     <stroke
             android:width="2dp"
