@@ -32,8 +32,38 @@
             android:name="com.resala.mobile.qrregister.ui.eventsfragment.EventListFrag"
             android:label="Events"
             tools:layout="@layout/frag_events">
+        <action
+                android:id="@+id/action_eventsFrag_to_eventDetailsFrag"
+                app:destination="@id/eventDetailsFrag"
 
+                />
+        <action
+                android:id="@+id/action_eventsFrag_to_loginFrag"
+                app:destination="@id/loginFrag"
+                app:popUpTo="@+id/nav_graph"
+                app:popUpToInclusive="true"/>
     </fragment>
 
+    <fragment
+            android:id="@+id/eventDetailsFrag"
+            android:name="com.resala.mobile.qrregister.ui.eventdetailsfragment.EventDetailsFrag"
+            android:label="{title}"
+            tools:layout="@layout/frag_event_details">
 
+        <argument
+                android:name="eventId"
+                app:argType="string"
+                app:nullable="false" />
+        <argument
+                android:name="title"
+                app:argType="string"
+                app:nullable="false" />
+        <action
+                android:id="@+id/action_eventDetailsFrag_to_eventsFrag"
+                app:destination="@id/eventsFrag"
+                app:popUpTo="@+id/nav_graph"
+                />
+
+
+    </fragment>
 </navigation>

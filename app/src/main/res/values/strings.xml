@@ -26,8 +26,8 @@
     <string name="forgot">Forgot password?</string>
     <string name="sign_in">Sign In</string>
     <string name="please_grant_camera_permission">Please grant camera Permession</string>
-    <string name="vid">Volunteer ID</string>
-    <string name="register_volunteer_by_scanning_qr_code_or_by_id">Register Volunteer by scanning QR code or by ID</string>
+    <string name="vidphone">Volunteer ID/Mobile</string>
+    <string name="register_volunteer_by_scanning_qr_code_or_by_id">Register Volunteer by scanning QR code or by ID/Mobile</string>
     <string name="register">register</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -38,5 +38,23 @@
     <string name="drag_to_register_new_volunteer">Drag to register new Volunteer</string>
     <string name="timeout">Connection timeout</string>
     <string name="device_is_offline">Device is offline!</string>
+    <string name="send">send</string>
+    <string name="branch_id">Branch ID</string>
+    <string name="event_id">Event ID</string>
+    <string name="name">Name</string>
+    <string name="region_id">Region ID</string>
+    <string name="logout">Logout</string>
+    <string name="Are_you_sure_want_to_logout">Are you sure want to logout ?</string>
+    <string name="Confirm">Confirm</string>
+    <string name="Cancel">Cancel</string>
+    <string name="required_field">Required</string>
+    <string name="not_valid_mobile">Not a valid mobile number</string>
+    <string name="invalid_email_format">Invalid Email Address</string>
+    <string name="idcode">كود / ID</string>
+    <string name="httpexception">Http Exception</string>
+    <string name="registration_successful">Registration Successful</string>
+    <string name="volunteer_code">Volunteer Code</string>
+    <string name="invalid_credintials">Invalid Credintials</string>
+    <string name="choose_a_region_from_the_list">Choose Region</string>
 
 </resources>

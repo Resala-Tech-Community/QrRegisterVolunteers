@@ -38,11 +38,12 @@
                         android:padding="@dimen/_15sdp">
 
                     <TextView
+                            style="@style/TextViewStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_15sdp"
+
                             android:gravity="center_vertical"
-                            android:text="Validation Successful"
+                            android:text="@string/registration_successful"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                             android:textColor="@android:color/holo_green_dark"
                             android:textStyle="bold" />
@@ -58,7 +59,55 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="@dimen/_15sdp">
+                           >
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                            <TextView
+                                    style="@style/TextViewStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/volunteer_code"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:orientation="vertical">
+
+                            <TextView
+                                    android:id="@+id/qrcode"
+                                    style="@style/TextViewStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text=""
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                    android:textColor="@color/resala_blue"
+                                    android:textStyle="bold" />
+
+                            <ImageView
+                                    android:id="@+id/qrcodeimage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                           >
 
                         <LinearLayout
                                 android:layout_width="match_parent"
@@ -67,12 +116,12 @@
 
                             <TextView
                                     android:id="@+id/volunteer"
+                                    style="@style/TextViewStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_vertical"
-                                    android:text="Muhammad Sayed"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                                     />
+                                    android:text=""
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
 
                         </LinearLayout>
 
@@ -83,10 +132,11 @@
 
                             <TextView
                                     android:id="@+id/event"
+                                    style="@style/TextViewStyle"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_vertical"
-                                    android:text="Qwaphil Dakhli Event"
+                                    android:text=""
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/resala_blue"
                                     android:textStyle="bold" />
@@ -94,9 +144,6 @@
                         </LinearLayout>
 
                     </LinearLayout>
-
-
-
 
 
                 </LinearLayout>

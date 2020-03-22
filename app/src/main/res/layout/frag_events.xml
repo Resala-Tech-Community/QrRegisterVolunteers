@@ -24,6 +24,27 @@
             android:background="@color/white"
             android:orientation="vertical">
 
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                app:menu="@menu/logout_menu"
+                android:visibility="visible"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+            <ImageView
+                    android:id="@+id/app_bar_image"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/resala_logo" />
+
+
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/refresh_layout"

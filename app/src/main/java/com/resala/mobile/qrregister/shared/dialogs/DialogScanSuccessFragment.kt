@@ -11,10 +11,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.resala.mobile.qrregister.R
+
 
 
 class DialogScanSuccessFragment : DialogFragment() {
@@ -22,12 +28,14 @@ class DialogScanSuccessFragment : DialogFragment() {
     private var root_view: View? = null
     private var NAME = ""
     private var EVENT = ""
+    private var QRCODE = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             NAME = arguments?.getString("NAME")!!
             EVENT = arguments?.getString("EVENT")!!
+            QRCODE = arguments?.getString("QRCODE")!!
         }
 
     }
@@ -49,9 +57,23 @@ class DialogScanSuccessFragment : DialogFragment() {
 
         val event = root_view!!.findViewById<TextView>(R.id.event)
         val volunteer = root_view!!.findViewById<TextView>(R.id.volunteer)
+        val qrcode = root_view!!.findViewById<TextView>(R.id.qrcode)
+        val qrcodeimage = root_view!!.findViewById<ImageView>(R.id.qrcodeimage)
+
         event.text = EVENT
         volunteer.text = NAME
+        qrcode.text = QRCODE
 
+        val multiFormatWriter = MultiFormatWriter()
+        try {
+            val bitMatrix =
+                multiFormatWriter.encode(QRCODE, BarcodeFormat.QR_CODE, 600, 600)
+            val barcodeEncoder = BarcodeEncoder()
+            val bitmap = barcodeEncoder.createBitmap(bitMatrix)
+            qrcodeimage.setImageBitmap(bitmap)
+        } catch (e: WriterException) {
+            e.printStackTrace()
+        }
 
     }
 

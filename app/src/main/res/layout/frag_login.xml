@@ -49,6 +49,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/etInputId"
                         style="@style/TextInputLayoutStyle"
+                        android:layout_width="0dp"
                         android:hint="@string/id"
                         app:layout_constraintEnd_toEndOf="@id/guideline2"
                         app:layout_constraintStart_toStartOf="@id/guideline"
@@ -67,6 +68,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/etInputPassword"
                         style="@style/TextInputLayoutStyle"
+                        android:layout_width="0dp"
                         android:layout_marginTop="16dp"
                         android:hint="@string/password"
                         app:layout_constraintEnd_toEndOf="@id/guideline2"
@@ -81,7 +83,8 @@
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/ic_lock_black_24dp"
                             android:drawablePadding="@dimen/_8sdp"
-                            android:inputType="textPassword" />
+                            android:imeOptions="actionDone"
+                            android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,16 +114,17 @@
                         android:text="@string/forgot"
                         android:textColor="@color/warm_grey"
                         android:textStyle="normal"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="@+id/guideline2"
                         app:layout_constraintTop_toBottomOf="@+id/etInputPassword" />
 
                 <TextView
-                        android:onClick="@{() -> viewmodel.doLogin()}"
                         android:id="@+id/loginTextView"
                         style="@style/TextViewStyle"
                         android:layout_marginStart="16dp"
                         android:clickable="true"
                         android:focusable="true"
+                        android:onClick="@{() -> viewmodel.doLogin()}"
                         android:text="@string/sign_in"
                         android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"

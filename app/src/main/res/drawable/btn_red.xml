@@ -8,28 +8,41 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/btn_semi_red" />
-            <corners android:radius="@dimen/_4sdp" />
+
+            <corners android:radius="@dimen/_200sdp" />
+            <gradient
+                    android:angle="45"
+                    android:endColor="@color/resala_red"
+                    android:startColor="@color/resala_blue" />
         </shape>
     </item>
     <item android:state_focused="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/btn_semi_red" />
-            <corners android:radius="@dimen/_4sdp" />
+            <gradient
+                    android:angle="45"
+                    android:endColor="@color/resala_red"
+                    android:startColor="@color/resala_blue" />
+            <corners android:radius="@dimen/_200sdp" />
         </shape>
     </item>
 
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/btn_semi_red" />
-            <corners android:radius="@dimen/_4sdp" />
+            <gradient
+                    android:angle="45"
+                    android:endColor="@color/resala_red"
+                    android:startColor="@color/resala_blue" />
+            <corners android:radius="@dimen/_200sdp" />
         </shape>
     </item>
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/resala_red" />
-            <corners android:radius="@dimen/_4sdp" />
+            <gradient
+                    android:angle="45"
+                    android:endColor="@color/resala_red"
+                    android:startColor="@color/resala_blue" />
+            <corners android:radius="@dimen/_200sdp" />
         </shape>
     </item>
 </selector>

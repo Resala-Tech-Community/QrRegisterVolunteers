@@ -7,10 +7,9 @@ package com.resala.mobile.qrregister.shared.util.ext
 
 import android.app.Activity
 import android.content.Context
-import com.google.gson.Gson
 import com.resala.mobile.qrregister.R
-import com.resala.mobile.qrregister.shared.data.model.NormalResponse
 import com.resala.mobile.qrregister.shared.util.FlashbarUtil
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.util.concurrent.TimeoutException
@@ -19,12 +18,7 @@ import java.util.concurrent.TimeoutException
 fun Throwable.showError(context: Context): Boolean {
     when (this) {
         is HttpException -> {
-            val gson = Gson()
-            val errorResponse = gson.fromJson(
-                this.response()?.errorBody()?.charStream(),
-                NormalResponse::class.java
-            )
-            FlashbarUtil.show(errorResponse.message, activity = context as Activity)
+            checkError(this, context)
         }
         is TimeoutException -> FlashbarUtil.show(
             context.getString(R.string.timeout),
@@ -36,4 +30,14 @@ fun Throwable.showError(context: Context): Boolean {
         )
     }
     return false
+}
+
+private fun checkError(errorException: HttpException?, context: Context) {
+    val errorBody = errorException?.response()?.errorBody()?.string()
+    val mainObject = JSONObject(errorBody)
+    FlashbarUtil.show(
+        mainObject.getString("message"),
+        activity = context as Activity
+    )
+
 }

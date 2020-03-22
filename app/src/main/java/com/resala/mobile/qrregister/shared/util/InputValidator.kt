@@ -23,5 +23,6 @@ fun isNumeric(string: String): Boolean = TextUtils.isDigitsOnly(string)
 
 fun isPasswordLengthLessThanSix(string: String): Boolean = string.length < 6
 
+fun isPhoneNumber(string: String): Boolean = string.length == 11
 
 fun isNameLengthGreaterThanThree(string: String): Boolean = string.length > 3

@@ -8,36 +8,42 @@ package com.resala.mobile.qrregister.shared.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.resala.mobile.qrregister.shared.util.ext.toDate
+import com.resala.mobile.qrregister.shared.util.ext.toDateTime
 
+/*    {
+        "branchId": 1,
+        "eventId": 2,
+        "eventDate": "1582397342000",
+        "name": "test event 2",
+        "startTime": "09:00",
+        "lastTimeToReg": "10:00"
+    },*/
 
 @Entity
 data class EventPOJO constructor(
     @PrimaryKey
-    @SerializedName("id")
-    var id: Int,
+    @SerializedName("eventId")
+    var eventId: Int,
+    @SerializedName("branchId")
+    var branchId: Int,
     @SerializedName("name")
     var name: String,
-    @SerializedName("branch")
-    var branch: String,
-    @SerializedName("date")
-    var date: String
+    @SerializedName("eventDate")
+    var date: String,
+    @SerializedName("startTime")
+    var startTime: String,
+    @SerializedName("lastTimeToReg")
+    var lastTimeToReg: String
 
 ) {
 
-    val titleForList: String
-        get() = if (name.isNotEmpty()) name else branch
+    val formattedDate: String
+        get() = if (date.isNotEmpty()) date.toDateTime() else "dd/mm/yyyy"
 
-    val branchForList: String
-        get() = if (branch.isNotEmpty()) branch else branch
+    val dateInList: String
+        get() = if (date.isNotEmpty()) date.toDate() else "dd/mm/yyyy"
 
-    val dateForList: String
-        get() = if (date.isNotEmpty()) date else branch
-
-    val time: String
-        get() = if (date.isNotEmpty()) "11:30" else branch
-
-    val meridian: String
-        get() = if (date.isNotEmpty()) "AM" else branch
 
 }
 

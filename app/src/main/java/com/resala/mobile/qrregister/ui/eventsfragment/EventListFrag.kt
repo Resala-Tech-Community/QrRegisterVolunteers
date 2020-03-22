@@ -7,42 +7,62 @@ package com.resala.mobile.qrregister.ui.eventsfragment
 
 
 import Utils
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.resala.mobile.qrregister.R
 import com.resala.mobile.qrregister.databinding.FragEventsBinding
 import com.resala.mobile.qrregister.shared.data.model.EventPOJO
 import com.resala.mobile.qrregister.shared.ui.frag.BaseFrag
+import com.resala.mobile.qrregister.shared.util.RecyclerSectionItemDecoration
+import com.resala.mobile.qrregister.shared.util.RecyclerSectionItemDecoration.SectionCallback
 import com.resala.mobile.qrregister.shared.util.ext.showError
+import com.resala.mobile.qrregister.shared.vm.SharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 open class EventListFrag : BaseFrag<EventListVm>() {
 
     override val vm: EventListVm by viewModel()
+
     override var layoutId: Int = R.layout.frag_events
     private var mEventList: ArrayList<EventPOJO>? = null
     private var eventadapter: EventsAdapter<EventPOJO>? = null
     private lateinit var viewDataBinding: FragEventsBinding
+    private var flagDecoration = false
+    private lateinit var model: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         viewDataBinding = FragEventsBinding.inflate(inflater, container, false).apply {
             viewmodel = vm
         }
-
         setHasOptionsMenu(true)
+        model = activity()?.let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }!!
+
         return viewDataBinding.root
     }
 
 
     override fun doOnViewCreated() {
         super.doOnViewCreated()
+        viewDataBinding.toolbar.inflateMenu(R.menu.logout_menu)
+        viewDataBinding.toolbar.menu.findItem(R.id.logout).setOnMenuItemClickListener {
+            showLogout()
+            return@setOnMenuItemClickListener true
+        }
         checkValidation()
     }
 
@@ -55,14 +75,18 @@ open class EventListFrag : BaseFrag<EventListVm>() {
     }
 
     private fun checkValidation() {
-        hasToolBar = true
+
+
         if (Utils.isOnline(activity())) {
+
+            flagDecoration = false
             setupListAdapter()
             getEventList()
 
         } else {
             showOfflineMode()
         }
+
     }
 
     private fun getEventList() {
@@ -78,6 +102,8 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                         showMainLayout()
                         mEventList?.clear()
                         mEventList?.addAll(it.eventList)
+
+                        setUpStickyHeaders(mEventList)
                         eventadapter!!.notifyDataSetChanged()
                         hideLoading()
                     }
@@ -94,7 +120,45 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                 }
             }
         )
-        vm.getEvents()
+        vm.getEvents(vm.pref.session)
+
+    }
+
+
+    private fun setUpStickyHeaders(mEventList: ArrayList<EventPOJO>?) {
+
+        val headers: MutableMap<String, Int> = mutableMapOf()
+        mEventList?.forEachIndexed { index, eventPOJO ->
+            if (!headers.containsKey(eventPOJO.date))
+                headers[eventPOJO.date] = index
+        }
+
+
+        val sectionItemDecoration =
+            RecyclerSectionItemDecoration(
+                resources.getDimensionPixelSize(R.dimen._40sdp),
+                true,  // true for sticky, false for not
+                object : SectionCallback {
+                    override fun isSection(position: Int): Boolean {
+                        return (headers.values.contains(position))
+                    }
+
+                    override fun getSectionHeader(position: Int): CharSequence {
+                        return mEventList?.get(position)
+                            ?.formattedDate!!.subSequence(
+                            0,
+                            mEventList[position].formattedDate.length
+                        )
+
+                    }
+                })
+
+
+
+        if (!flagDecoration) {
+            viewDataBinding.eventsList.addItemDecoration(sectionItemDecoration)
+            flagDecoration = true
+        }
 
     }
 
@@ -115,15 +179,69 @@ open class EventListFrag : BaseFrag<EventListVm>() {
 
 
     private fun onEventClicked(event: EventPOJO) {
+        model.select(event)
+        val action = EventListFragDirections.actionEventsFragToEventDetailsFrag(
+            event.eventId.toString(),
+            event.name
+        )
+        if (findNavController().currentDestination?.id == R.id.eventsFrag) {
+            findNavController().navigate(action)
+        }
+    }
 
-//        val action =
-//            EventListFragDirections.actionEventsFragToEventDetailsFrag(
-//                event.id.toString(),
-//                event.name
-//            )
-//        if (findNavController().currentDestination?.id == R.id.eventsFrag) {
-//            findNavController().navigate(action)
-//        }
+
+    fun showLogout() {
+
+        val dialogBuilder = AlertDialog.Builder(activity())
+        // ...Irrelevant code for customizing the buttons and title
+        val inflater = activity()!!.layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_logout, null)
+        dialogBuilder.setView(dialogView)
+
+        val tv_confirm = dialogView.findViewById(R.id.tv_logout_confirm) as TextView
+        val tv_cancle = dialogView.findViewById(R.id.tv_logout_cancel) as TextView
+
+
+        val alertDialog = dialogBuilder.create()
+        alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.window!!.attributes.windowAnimations = R.style.DialougAnimation
+        alertDialog.show()
+
+        tv_confirm.setOnClickListener {
+            alertDialog.dismiss()
+            doLogout()
+        }
+
+        tv_cancle.setOnClickListener { alertDialog.dismiss() }
+
+    }
+
+    private fun doLogout() {
+
+        vm.logoutResponse.observe(this, Observer {
+            when {
+                it.result != null -> {
+                    activity()?.hideProgressBar()
+                    vm.pref.session = ""
+
+                    val action = EventListFragDirections.actionEventsFragToLoginFrag()
+                    findNavController().navigate(action)
+                }
+                it.error != null -> {
+                    it.error.showError(context()!!)
+                    activity()?.hideProgressBar()
+                }
+
+                it.isLoading -> {
+                    activity()?.showProgressBar()
+                }
+            }
+
+        })
+        vm.logout(
+            vm.pref.session
+        )
+
     }
 
 

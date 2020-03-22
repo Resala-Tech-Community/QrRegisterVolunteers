@@ -6,8 +6,10 @@
 package com.resala.mobile.qrregister.shared.koin
 
 
+import android.util.Log
 import androidx.preference.PreferenceManager
 import androidx.room.Room
+import com.google.gson.GsonBuilder
 import com.resala.mobile.qrregister.BuildConfig
 import com.resala.mobile.qrregister.shared.data.DataManager
 import com.resala.mobile.qrregister.shared.databases.AppDatabase
@@ -16,8 +18,10 @@ import com.resala.mobile.qrregister.shared.network.ApiInterface
 import com.resala.mobile.qrregister.shared.network.ApiRepository
 import com.resala.mobile.qrregister.shared.rx.SchedulerProvider
 import com.resala.mobile.qrregister.shared.rx.SchedulerProviderImpl
+import com.resala.mobile.qrregister.shared.util.BasicAuthInterceptor
 import com.resala.mobile.qrregister.shared.util.SharedPref
-import com.google.gson.GsonBuilder
+import com.resala.mobile.qrregister.shared.util.StringConverterFactory
+import com.resala.mobile.qrregister.shared.util.io.ReceivedCookiesInterceptor
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,23 +33,24 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-
 val appModule = module {
 
     // ApiInterface
     single {
 
         val gson = GsonBuilder()
-                .setLenient()
-                .create()
+            .setLenient()
+            .create()
 
         Retrofit.Builder()
-                .baseUrl(BuildConfig.API_BASE_URL)
-                .client(get())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-                .build()
-                .create(ApiInterface::class.java)
+            .baseUrl(BuildConfig.API_BASE_URL)
+            .client(get())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(StringConverterFactory.create())
+
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .build()
+            .create(ApiInterface::class.java)
     }
 
 
@@ -56,10 +61,24 @@ val appModule = module {
 
 
         val builder = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+//            .addInterceptor(
+//                BasicAuthInterceptor(
+//                    SharedPref(get()).username,
+//                    SharedPref(get()).password
+//                )
+//            )
+            .addInterceptor(ReceivedCookiesInterceptor())
+//            .addNetworkInterceptor(
+//                BasicAuthInterceptor(
+//                    SharedPref(get()).username,
+//                    SharedPref(get()).password
+//                )
+//            )
+
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
         builder.build()
     }
 
@@ -69,7 +88,7 @@ val appModule = module {
 
     single {
         Room.databaseBuilder(get(), AppDatabase::class.java, "resala-db")
-                .build()
+            .build()
     }
 
     single { DBRepository(get()) }
@@ -80,7 +99,6 @@ val appModule = module {
     single { PreferenceManager.getDefaultSharedPreferences(androidContext()) }
 
     single<SchedulerProvider> { SchedulerProviderImpl() }
-
 
 
 }

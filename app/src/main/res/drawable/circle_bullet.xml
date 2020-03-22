@@ -10,4 +10,5 @@
             android:width="@dimen/_8sdp"
             android:height="@dimen/_8sdp" />
     <solid android:color="@color/resala_blue" />
+
 </shape>

@@ -153,6 +153,7 @@ ext.versions = [
         cardView                   : "1.0.0",
         archNavigation             : "1.0.0",
         threetenabp                : "1.2.1",
+        ticker                     : "2.0.2",
 
 ]
 
@@ -298,6 +299,7 @@ ext.deps = [
         ],
 
         timber                      : "com.jakewharton.timber:timber:${versions.timber}",
+        ticker                       :"com.robinhood.ticker:ticker:${versions.ticker}",
         stetho                      : [
                 main : "com.facebook.stetho:stetho:${versions.stetho}",
                 realm: "com.uphyca:stetho_realm:${versions.stetho_realm}",

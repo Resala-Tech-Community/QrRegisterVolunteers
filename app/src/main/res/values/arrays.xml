@@ -5,5 +5,8 @@
 
 <resources>
 
-
+<array name="gender">
+    <item>ذكر</item>
+    <item>أنثي</item>
+</array>
 </resources>
