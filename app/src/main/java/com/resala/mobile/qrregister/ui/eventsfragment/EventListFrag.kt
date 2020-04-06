@@ -108,9 +108,16 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                         hideLoading()
                     }
                     it.errorMessage != null -> {
-                        showErrorData()
-                        hideLoading()
-                        it.errorMessage.showError(context()!!)
+                        if (it.errorMessage is HttpException) {
+                            val code = it.errorMessage.code()
+                            if (code == 401) {
+                                doLogout()
+                            }
+                        } else {
+                            showErrorData()
+                            hideLoading()
+                            it.errorMessage.showError(context()!!)
+                        }
                     }
                     it.isOffline -> {
                         hideLoading()
@@ -228,12 +235,7 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                     findNavController().navigate(action)
                 }
                 it.error != null -> {
-                    when (this) {
-                        is HttpException -> {
-                            doLogout()
-                        }
-                    }
-                    //it.error.showError(context()!!)
+                    it.error.showError(context()!!)
                     activity()?.hideProgressBar()
                 }
 

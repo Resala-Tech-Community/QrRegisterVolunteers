@@ -117,7 +117,7 @@ class LoginFrag : BaseFrag<LoginVm>() {
                     activity()?.hideProgressBar()
                     when (it.result.code()) {
                         in 200..300 -> {
-
+                            //vm.pref.session = "JSESSIONID=1AE1437174DAB9F3E5B27A72C5B9DD61"
                             vm.pref.session = it.result.headers().get("Set-Cookie")!!
                             val action = LoginFragDirections
                                 .actionLoginFragToEventsFrag()
