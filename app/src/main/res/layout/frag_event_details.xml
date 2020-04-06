@@ -31,9 +31,9 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/white"
                     android:gravity="end"
+
                     android:visibility="visible"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
-
 
 
             <com.robinhood.ticker.TickerView
@@ -74,11 +74,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:visibility="gone"
                         android:text="@string/register_volunteer_by_scanning_qr_code_or_by_id"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/_9ssp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                 <Space
                         android:layout_width="0dp"
@@ -102,9 +102,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
                                 android:hint="@string/idcode"
-                                android:layoutDirection="ltr"
                                 android:imeOptions="actionDone"
                                 android:inputType="text"
+                                android:layoutDirection="ltr"
                                 android:textColor="@color/white"
                                 android:textColorHint="@android:color/white" />
 
@@ -146,9 +146,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
                                 android:hint="رقم الهاتف"
-                                android:layoutDirection="ltr"
                                 android:imeOptions="actionDone"
                                 android:inputType="phone"
+                                android:layoutDirection="ltr"
                                 android:textColor="@color/white"
                                 android:textColorHint="@android:color/white" />
 
@@ -190,10 +190,12 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_15sdp"
                     android:clickable="true"
+                    android:elevation="0dp"
                     android:focusable="true"
                     android:onClick="@{() -> viewmodel.openSheet()}"
                     android:tint="@android:color/white"
                     android:visibility="visible"
+                    app:elevation="0dp"
                     app:fabSize="normal"
                     app:layout_anchor="@id/new_volunteer_sheet"
                     app:layout_anchorGravity="top|end"

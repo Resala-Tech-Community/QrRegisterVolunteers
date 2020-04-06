@@ -27,6 +27,7 @@ import com.resala.mobile.qrregister.shared.util.RecyclerSectionItemDecoration.Se
 import com.resala.mobile.qrregister.shared.util.ext.showError
 import com.resala.mobile.qrregister.shared.vm.SharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
+import retrofit2.HttpException
 
 
 open class EventListFrag : BaseFrag<EventListVm>() {
@@ -227,7 +228,12 @@ open class EventListFrag : BaseFrag<EventListVm>() {
                     findNavController().navigate(action)
                 }
                 it.error != null -> {
-                    it.error.showError(context()!!)
+                    when (this) {
+                        is HttpException -> {
+                            doLogout()
+                        }
+                    }
+                    //it.error.showError(context()!!)
                     activity()?.hideProgressBar()
                 }
 

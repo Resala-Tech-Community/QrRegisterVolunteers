@@ -17,7 +17,7 @@
     <color name="resala_semi_blue">#812B2E7F</color>
     <color name="overlay_light_30">#4DFFFFFF</color>
     <color name="color_opacity_black">#9c000000</color>
-    <color name="start_event">#C0D619</color>
+    <color name="start_event">@color/colorPrimary</color>
     <!--barcode colors-->
 
     <color name="viewfinder_laser">@color/colorAccent</color>

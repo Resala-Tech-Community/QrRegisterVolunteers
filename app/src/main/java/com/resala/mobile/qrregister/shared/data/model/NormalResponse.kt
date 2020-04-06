@@ -10,20 +10,19 @@ import java.io.Serializable
 
 open class NormalResponse : Serializable {
 
-    @SerializedName("status")
-    var status: String = ""
+    @SerializedName("timestamp")
+    var timestamp: String = ""
 
-    @SerializedName("code")
-    var code: Int = 0
+    @SerializedName("status")
+    var status: Int = 0
+
+    @SerializedName("error")
+    var error: String = ""
 
     @SerializedName("message")
     var message: String = ""
 
-    @SerializedName("next_offset")
-    var nextOffset: Int = 0
+    @SerializedName("path")
+    var path: String = ""
 
-
-    override fun toString(): String {
-        return "NormalResponse(status='$status', code='$code', message='$message', nextOffset='$nextOffset')"
-    }
 }

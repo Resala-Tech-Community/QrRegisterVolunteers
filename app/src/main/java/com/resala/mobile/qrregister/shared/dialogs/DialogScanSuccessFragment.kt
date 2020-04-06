@@ -16,11 +16,13 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.resala.mobile.qrregister.R
-
+import java.util.*
 
 
 class DialogScanSuccessFragment : DialogFragment() {
@@ -65,9 +67,19 @@ class DialogScanSuccessFragment : DialogFragment() {
         qrcode.text = QRCODE
 
         val multiFormatWriter = MultiFormatWriter()
+        val hintMap: MutableMap<EncodeHintType, Any> =
+            EnumMap<EncodeHintType, Any>(
+                EncodeHintType::class.java
+            )
+
+        hintMap[EncodeHintType.CHARACTER_SET] = "UTF-8"
+        hintMap[EncodeHintType.MARGIN] = 1 /* default = 4 */
+        hintMap[EncodeHintType.ERROR_CORRECTION] = ErrorCorrectionLevel.L
+
+
         try {
             val bitMatrix =
-                multiFormatWriter.encode(QRCODE, BarcodeFormat.QR_CODE, 600, 600)
+                multiFormatWriter.encode(QRCODE, BarcodeFormat.QR_CODE, 600, 600,hintMap)
             val barcodeEncoder = BarcodeEncoder()
             val bitmap = barcodeEncoder.createBitmap(bitMatrix)
             qrcodeimage.setImageBitmap(bitmap)

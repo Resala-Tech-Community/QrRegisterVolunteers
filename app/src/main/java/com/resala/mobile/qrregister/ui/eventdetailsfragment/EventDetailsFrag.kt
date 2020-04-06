@@ -170,7 +170,6 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
     }
 
     private fun setToolBar() {
-
         viewDataBinding.toolbar.title = event?.name
         viewDataBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         viewDataBinding.toolbar.setNavigationOnClickListener { activity()!!.onBackPressed() }
@@ -223,9 +222,17 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
         mScannerView!!.startCamera()
     }
 
+
+    private fun resumeCamera() {
+        mScannerView!!.setResultHandler(this)
+        mScannerView?.setAutoFocus(true)
+        mScannerView!!.resumeCameraPreview(this)
+    }
+
     override fun onResume() {
         super.onResume()
-        startCamera()
+        resumeCamera()
+
     }
 
 
