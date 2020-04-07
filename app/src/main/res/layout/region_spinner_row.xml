@@ -17,7 +17,6 @@
             android:gravity="start"
             android:padding="@dimen/_5sdp"
             android:text="@string/choose_a_region_from_the_list"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/_10ssp" />
+            android:textColor="@android:color/black" />
 
 </LinearLayout>
