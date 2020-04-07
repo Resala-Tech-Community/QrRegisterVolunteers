@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by  Mobile Dev Team  on 4/7/20 8:48 PM
+  ~ Copyright (c) Resala Charity Organization. All rights reserved.
+  -->
+
+
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The drawables used here can be solid colors, gradients, shapes, images, etc. -->
+    <item android:drawable="@drawable/btn_send_code" />
+    <item android:drawable="@drawable/btn_send_code_change" />
+</transition>

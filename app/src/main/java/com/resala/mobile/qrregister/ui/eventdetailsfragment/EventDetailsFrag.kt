@@ -7,6 +7,8 @@ package com.resala.mobile.qrregister.ui.eventdetailsfragment
 
 import Utils
 import android.Manifest
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
@@ -101,7 +103,16 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
         viewDataBinding.run {
             tickerView.setCharacterLists(TickerUtils.provideNumberList())
             tickerView.animationDuration = 600
+
         }
+
+//        val transitionDrawable: TransitionDrawable =
+//            viewDataBinding.live.background as TransitionDrawable
+//        transitionDrawable.startTransition(600)
+//animate colors of background
+        animateColors()
+
+
         mFirebaseDatabase?.addValueEventListener(object : ValueEventListener {
 
             override fun onCancelled(dataError: DatabaseError) {
@@ -130,6 +141,21 @@ class EventDetailsFrag : BaseFrag<EventDetailsVm>(), ZXingScannerView.ResultHand
         } else {
             startCamera()
         }
+    }
+
+    private fun animateColors() {
+        val startColor = resources.getColor(R.color.resala_dark_red)
+        val endColor = resources.getColor(R.color.btn_light_red)
+
+        val valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), startColor, endColor).apply {
+            duration = 2500
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+            addUpdateListener {
+                viewDataBinding.live.setBackgroundColor(it.animatedValue as Int)
+            }
+        }
+        valueAnimator.start()
     }
 
     private fun initView() {
