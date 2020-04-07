@@ -7,7 +7,6 @@
     <color name="colorPrimary">#303F9F</color>
     <color name="colorPrimaryDark">#2B2E7F</color>
     <color name="colorAccent">#D52929</color>
-
     <color name="black_effective">#000000</color>
     <color name="btn_semi_grey">#80BBBBBB</color>
     <color name="btn_semi_red">#80EB595F</color>
@@ -19,7 +18,6 @@
     <color name="color_opacity_black">#9c000000</color>
     <color name="start_event">@color/colorPrimary</color>
     <!--barcode colors-->
-
     <color name="viewfinder_laser">@color/colorAccent</color>
     <color name="viewfinder_border">@color/colorPrimary</color>
 </resources>
